@@ -93,7 +93,7 @@ export default function AboutPage() {
           </div>
           <div className="about-venture-links">
             <Link href="https://maigie.com" target="_blank" rel="noreferrer"><span><b>Maigie</b><small>An intelligent learning environment.</small></span><ArrowUpRight size={18} /></Link>
-            <Link href="https://cakkie.com" target="_blank" rel="noreferrer"><span><b>Cakkie</b><small>A social platform for cake enthusiasts.</small></span><ArrowUpRight size={18} /></Link>
+            <div className="about-venture-static"><span><b>Cakkie</b><small>A social platform for cake enthusiasts.</small></span></div>
             <p>BuildGenie-led ventures, not commissioned client case studies.</p>
           </div>
         </div>
