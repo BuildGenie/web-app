@@ -8,6 +8,13 @@ import { advisorLink } from "@/components/advisor-link";
 export const metadata = {
   title: "About | BuildGenie Labs",
   description: "BuildGenie Labs is a building partner for founders, connecting business strategy, marketing, technology and execution.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    title: "About BuildGenie Labs | Building Partner for Founders",
+    description: "Get to know BuildGenie Labs: a building partner connecting business strategy, marketing, technology and execution.",
+    url: "/about",
+  },
 };
 
 const principles = [
