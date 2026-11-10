@@ -21,6 +21,13 @@ export const metadata = {
   title: "Marketing & Growth | BuildGenie Labs",
   description:
     "Practical marketing, validation and growth execution for startups. BuildGenie Labs helps founders find customers and build momentum.",
+  alternates: { canonical: "/services/marketing" },
+  openGraph: {
+    type: "website",
+    title: "Marketing & Growth | BuildGenie Labs",
+    description: "Practical marketing, validation and growth execution for startups. BuildGenie helps founders find customers and build momentum.",
+    url: "/services/marketing",
+  },
 };
 
 const engagements = [
