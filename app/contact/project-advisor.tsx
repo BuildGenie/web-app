@@ -546,7 +546,6 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     setRequestMailto("");
     setShowLeadForm(true);
     trackEvent("advisor_work_with_us_click", {
-      requested_item: item,
       has_recommendation: Boolean(recommendation),
     });
   }
@@ -759,7 +758,6 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     setShowConfirmation(true);
     trackEvent("advisor_request_email_prepared", {
       has_recommendation: Boolean(plan),
-      requested_item: requestedItem || "initial_conversation",
     });
     window.location.href = mailto;
   }
