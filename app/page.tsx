@@ -270,6 +270,53 @@ export default function Home() {
         </div>
       </section>
 
+
+      <section className="client-work section-pad" id="clients">
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <SectionEyebrow>SELECTED CLIENT WORK</SectionEyebrow>
+              <h2>Brands built with intent.<br /><span>Experiences built to connect.</span></h2>
+            </div>
+            <p>
+              We work with ambitious businesses to shape how they show up,
+              communicate their value and serve customers through thoughtful
+              digital experiences.
+            </p>
+          </div>
+
+          <article className="client-project-card">
+            <div className="client-project-art" aria-label="Prokem Afro-Caribbean Foods featured client project">
+              <span className="client-project-category">AFRO · CARIBBEAN · FOOD SUPPLIES</span>
+              <div className="client-project-wordmark">prokem<span>.</span></div>
+              <span className="client-project-art-note">THE FLAVOURS OF HOME,<br />DELIVERED ACROSS THE UK</span>
+              <span className="client-project-art-index">BG / CLIENT 01</span>
+            </div>
+            <div className="client-project-content">
+              <div className="client-project-meta">
+                <span>01 / FOOD & E-COMMERCE</span>
+                <span>CLIENT PROJECT</span>
+              </div>
+              <h3>Prokem Afro-Caribbean Foods</h3>
+              <p>
+                An Afro-Caribbean food retailer bringing authentic ingredients
+                and pantry essentials to customers across the United Kingdom.
+              </p>
+              <div className="client-project-deliveries">
+                <span>WHAT WE DELIVERED</span>
+                <div><i>01</i><strong>Branding & brand identity</strong></div>
+                <div><i>02</i><strong>Brand positioning & messaging</strong></div>
+                <div><i>03</i><strong>Website design & development</strong></div>
+                <div><i>04</i><strong>E-commerce platform development</strong></div>
+              </div>
+              <a href="https://prokemfoods.co.uk/" target="_blank" rel="noreferrer">
+                Visit Prokem <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="belief section-pad">
         <div className="container belief-grid">
           <div className="belief-mark"><Sparkles size={25} /><span>BUILT AROUND<br />YOUR NEXT MOVE</span></div>
