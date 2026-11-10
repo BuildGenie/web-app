@@ -220,7 +220,7 @@ export default function SpecialistServicesPage() {
               <h2>Pay for a defined<br /><span>piece of progress.</span></h2>
             </div>
             <p>
-              We don't force every requirement into a subscription. The
+              We don&apos;t force every requirement into a subscription. The
               commercial model follows the shape of the work.
             </p>
           </div>
@@ -234,7 +234,7 @@ export default function SpecialistServicesPage() {
             ))}
           </div>
           <div className="pricing-clarity">
-            <div><strong>Every quote makes the boundaries clear.</strong><p>You'll see the deliverables, assumptions, number of review rounds, timeline, responsibilities and exclusions before approving the work.</p></div>
+            <div><strong>Every quote makes the boundaries clear.</strong><p>You&apos;ll see the deliverables, assumptions, number of review rounds, timeline, responsibilities and exclusions before approving the work.</p></div>
             <div><strong>External costs stay separate.</strong><p>Media budgets, paid tools, stock assets, creator fees, printing and other third-party costs are itemised and approved before commitment.</p></div>
           </div>
         </div>
@@ -264,8 +264,8 @@ export default function SpecialistServicesPage() {
         <div className="container specialist-cta-inner">
           <div>
             <Eyebrow>HAVE A SPECIFIC REQUIREMENT?</Eyebrow>
-            <h2>Let's scope the work<br /><span>before we start.</span></h2>
-            <p>Share the outcome you need. We'll come back with a practical scope and a clear commercial proposal.</p>
+            <h2>Let&apos;s scope the work<br /><span>before we start.</span></h2>
+            <p>Share the outcome you need. We&apos;ll come back with a practical scope and a clear commercial proposal.</p>
           </div>
           <Link className="button button-orange" href="/contact">Request a proposal <ArrowUpRight size={17} /></Link>
         </div>
@@ -286,7 +286,7 @@ export default function SpecialistServicesPage() {
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT'S NEXT</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT&apos;S NEXT</span></div>
       </footer>
     </main>
   );
