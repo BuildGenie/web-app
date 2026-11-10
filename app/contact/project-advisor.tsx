@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import { useMemo, useState, type FormEvent, type KeyboardEvent } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -502,13 +502,6 @@ export function ProjectAdvisor() {
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
   const [requestPrepared, setRequestPrepared] = useState(false);
-  const chatBodyRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const node = chatBodyRef.current;
-    if (node) node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
-  }, [messages]);
-
   const progress = useMemo(() => {
     if (!context.goal) return 0;
     if (!context.stage) return 1;
@@ -726,7 +719,7 @@ export function ProjectAdvisor() {
             </div>
           </div>
 
-          <div className="advisor-chat-body" ref={chatBodyRef} aria-live="polite">
+          <div className="advisor-chat-body" aria-live="polite">
             <div className="advisor-session-note"><span /> A WORKING SESSION · NO SIGN-UP REQUIRED</div>
             {messages.map((message) => (
               <div className={`advisor-message advisor-message-${message.role}`} key={message.id}>
