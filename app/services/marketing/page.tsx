@@ -36,8 +36,8 @@ const engagements = [
       "Customer and audience discovery",
       "Competitor and alternative landscape",
       "Problem, proposition and message testing",
-      "Targeted outreach to a cohort of up to 25 product-trial participants",
-      "Feedback summary, evidence and clear next-step recommendation",
+      "Targeted outreach to a cohort of up to 25 qualified product-trial participants",
+      "Feedback summary with key assumptions",
       "Clear next-step recommendation",
     ],
   },
@@ -321,6 +321,7 @@ export default function MarketingGrowthPage() {
               );
             })}
           </div>
+          <p className="sprint-pricing-note">The cohort size is a planning ceiling, not a guaranteed number of activated users. Recruitment depends on audience availability and product readiness; paid media and participant incentives are budgeted separately.</p>
         </div>
       </section>
 
