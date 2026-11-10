@@ -20,6 +20,7 @@ const services = [
     number: "01",
     icon: Compass,
     title: "Strategy & direction",
+    href: "/services/strategy",
     description:
       "Make the important decisions with a clearer view of your market, customers and next move.",
     tags: ["Business strategy", "Go-to-market", "Product direction"],
@@ -28,6 +29,7 @@ const services = [
     number: "02",
     icon: ChartNoAxesCombined,
     title: "Marketing & growth",
+    href: "/services/marketing",
     description:
       "Turn a good product into a business people discover, understand, trust and choose.",
     tags: ["User acquisition", "Growth marketing", "Brand & content"],
@@ -36,6 +38,7 @@ const services = [
     number: "03",
     icon: Blocks,
     title: "Technology & products",
+    href: "/services/technology",
     description:
       "Shape and build useful digital products, platforms and systems that move the business forward.",
     tags: ["Product development", "Engineering", "AI & automation"],
@@ -44,6 +47,7 @@ const services = [
     number: "04",
     icon: Workflow,
     title: "Execution & operations",
+    href: "/services/specialist",
     description:
       "Bring the right people, processes and specialist capabilities together to get meaningful work done.",
     tags: ["Specialist services", "Customer experience", "Operations"],
@@ -171,7 +175,7 @@ export default function Home() {
                   <div className="tag-list">
                     {service.tags.map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
-                  <Link href="/services" className="card-link" aria-label={`Discuss ${service.title}`}>
+                  <Link href={service.href} className="card-link" aria-label={`Explore ${service.title}`}>
                     Explore capability <ArrowUpRight size={16} />
                   </Link>
                 </article>
