@@ -19,6 +19,13 @@ export const metadata = {
   title: "Specialist Services | BuildGenie Labs",
   description:
     "Commission focused design, content, performance marketing, research, customer support and operational services from BuildGenie Labs.",
+  alternates: { canonical: "/services/specialist" },
+  openGraph: {
+    type: "website",
+    title: "Specialist Services | BuildGenie Labs",
+    description: "Commission focused design, content, performance marketing, research, customer support and operational services.",
+    url: "/services/specialist",
+  },
 };
 
 const services = [
