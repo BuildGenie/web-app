@@ -69,6 +69,8 @@ const capabilities = [
       ["Performance marketing", "Campaign architecture, testing, optimisation and reporting."],
       ["Operations support", "Improve the workflows and coordination behind consistent delivery."],
     ],
+    href: "/services/specialist",
+    linkLabel: "Explore specialist services",
   },
 ];
 
@@ -198,6 +200,8 @@ export default function ServicesPage() {
                 <p>{item.description}</p>
                 {item.title === "Grow" ? (
                   <Link href="/services/marketing">Explore subscriptions <ArrowUpRight size={16} /></Link>
+                ) : item.title === "Specialist" ? (
+                  <Link href="/services/specialist">Explore specialist menu <ArrowUpRight size={16} /></Link>
                 ) : (
                   <Link href="/#contact">Discuss this engagement <ArrowUpRight size={16} /></Link>
                 )}
