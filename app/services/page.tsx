@@ -200,7 +200,7 @@ export default function ServicesPage() {
                 ) : item.title === "Specialist" ? (
                   <Link href="/services/specialist">Explore specialist menu <ArrowUpRight size={16} /></Link>
                 ) : (
-                  <Link href="/#contact">Discuss this engagement <ArrowUpRight size={16} /></Link>
+                  <Link href="/contact">Discuss this engagement <ArrowUpRight size={16} /></Link>
                 )}
               </article>
             ))}
@@ -218,7 +218,7 @@ export default function ServicesPage() {
               we'll help you identify the next practical step.
             </p>
           </div>
-          <Link className="button button-orange" href="/#contact">
+          <Link className="button button-orange" href="/contact">
             Talk to BuildGenie <ArrowUpRight size={17} />
           </Link>
         </div>
@@ -235,7 +235,7 @@ export default function ServicesPage() {
           </div>
           <div className="footer-links">
             <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="/#approach">Our approach</Link><Link href="/#ventures">Ventures</Link></div>
-            <div><span>CONNECT</span><Link href="mailto:hello@buildgenielabs.com">Email us</Link><Link href="/#contact">Start a project</Link></div>
+            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href="/contact">Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>
