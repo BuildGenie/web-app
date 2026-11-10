@@ -4,6 +4,13 @@ import { ServiceLandingPage, type ServicePageConfig } from "@/components/service
 export const metadata = {
   title: "Strategy & Go-to-Market | BuildGenie Labs",
   description: "Turn customer insight and business priorities into positioning, growth strategy and go-to-market plans.",
+  alternates: { canonical: "/services/strategy" },
+  openGraph: {
+    type: "website",
+    title: "Strategy & Go-to-Market | BuildGenie Labs",
+    description: "Turn customer insight and business priorities into positioning, growth strategy and go-to-market plans.",
+    url: "/services/strategy",
+  },
 };
 
 const config: ServicePageConfig = {
