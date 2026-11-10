@@ -21,8 +21,8 @@ const capabilities = [
     icon: Compass,
     name: "Strategy & validation",
     intro: "Make better decisions before committing time and capital.",
-    href: undefined,
-    linkLabel: undefined,
+    href: "/services/strategy",
+    linkLabel: "Explore strategy & validation",
     offerings: [
       ["Idea validation", "Test the problem, audience and appetite before building further."],
       ["Market & customer research", "Understand the landscape, alternatives and people you need to reach."],
@@ -49,8 +49,8 @@ const capabilities = [
     icon: Blocks,
     name: "Technology & products",
     intro: "Use technology to solve real problems and create better experiences.",
-    href: undefined,
-    linkLabel: undefined,
+    href: "/services/technology",
+    linkLabel: "Explore technology & products",
     offerings: [
       ["Product design & development", "Shape and deliver digital products from first release to scale."],
       ["Web & mobile engineering", "Build reliable web and mobile experiences for your customers."],
@@ -80,30 +80,40 @@ const engagementTypes = [
     title: "Validate",
     description:
       "A focused, one-off engagement to test an idea, proposition or market before making a bigger commitment.",
+    href: "/services/validate",
+    linkLabel: "Explore validation",
   },
   {
     number: "02",
     title: "Strategise",
     description:
       "A structured strategy engagement that creates direction, priorities and an actionable roadmap.",
+    href: "/services/strategy",
+    linkLabel: "Explore strategy",
   },
   {
     number: "03",
     title: "Grow",
     description:
       "Monthly subscriptions for consistent marketing execution, acquisition activity and learning.",
+    href: "/services/marketing",
+    linkLabel: "Explore growth programmes",
   },
   {
     number: "04",
     title: "Specialist",
     description:
       "Clearly scoped projects for a specific capability, deliverable or operational need.",
+    href: "/services/specialist",
+    linkLabel: "Explore specialist services",
   },
   {
     number: "05",
     title: "Support",
     description:
       "Customer support services that can be included in a plan or engaged as an add-on.",
+    href: "/services/support",
+    linkLabel: "Explore customer support",
   },
 ];
 
@@ -198,13 +208,7 @@ export default function ServicesPage() {
                 <div className="engagement-top"><span>{item.number}</span></div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                {item.title === "Grow" ? (
-                  <Link href="/services/marketing">Explore subscriptions <ArrowUpRight size={16} /></Link>
-                ) : item.title === "Specialist" ? (
-                  <Link href="/services/specialist">Explore specialist menu <ArrowUpRight size={16} /></Link>
-                ) : (
-                  <Link href="/contact">Discuss this engagement <ArrowUpRight size={16} /></Link>
-                )}
+                <Link href={item.href}>{item.linkLabel} <ArrowUpRight size={16} /></Link>
               </article>
             ))}
           </div>

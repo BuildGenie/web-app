@@ -724,3 +724,74 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 .subscription-card li {
   font-size: 12px;
 }
+
+
+/* Dedicated service landing pages */
+.service-detail-hero { background: #f6f3ef; padding: 105px 0 62px; }
+.service-detail-hero-inner { max-width: 1180px; }
+.service-detail-hero h1 { margin: 27px 0 22px; font: 800 clamp(48px, 6vw, 76px)/1.06 var(--font-manrope), sans-serif; letter-spacing: -4px; }
+.service-detail-hero h1 span { color: var(--orange); }
+.service-detail-hero-inner > p { max-width: 680px; color: var(--muted); font-size: 15px; line-height: 1.9; }
+.service-detail-hero-bottom { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-top: 36px; }
+.service-detail-hero-bottom > span { display: flex; align-items: center; gap: 10px; color: #171717; font-size: 10px; font-weight: 750; letter-spacing: 1.2px; }
+.service-detail-hero-bottom i { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+.service-detail-features { background: var(--paper); }
+.service-detail-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.service-detail-feature { min-height: 205px; padding: 23px; background: white; border: 1px solid #e9e4dd; }
+.service-detail-feature-top { display: flex; justify-content: space-between; align-items: center; color: var(--orange); }
+.service-detail-feature-top span { color: #171717; font-size: 10px; font-weight: 750; }
+.service-detail-feature h3 { margin: 25px 0 9px; font: 750 16px var(--font-manrope); }
+.service-detail-feature p { margin: 0; color: #171717; font-size: 12px; line-height: 1.8; }
+.service-detail-offers { background: #f3f0ec; }
+.service-detail-offer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.service-detail-offer { display: flex; flex-direction: column; padding: 27px; background: white; border: 1px solid #e9e4dd; }
+.service-detail-offer-top { display: flex; justify-content: space-between; gap: 12px; color: #171717; font-size: 9px; font-weight: 750; letter-spacing: .8px; }
+.service-detail-offer h3 { margin: 28px 0 5px; font: 800 24px var(--font-manrope); letter-spacing: -.7px; }
+.service-detail-offer-price { color: var(--orange); font: 800 25px var(--font-manrope); }
+.service-detail-offer-description { min-height: 58px; margin: 12px 0 20px; color: #171717; font-size: 12px; line-height: 1.8; }
+.service-detail-offer-includes { padding-top: 15px; border-top: 1px solid var(--line); color: #171717; font-size: 9px; font-weight: 750; letter-spacing: 1.1px; }
+.service-detail-offer ul { display: grid; gap: 11px; margin: 14px 0 23px; padding: 0; list-style: none; }
+.service-detail-offer li { display: flex; align-items: flex-start; gap: 9px; color: #171717; font-size: 12px; line-height: 1.65; }
+.service-detail-offer li svg { flex: 0 0 auto; margin-top: 2px; color: var(--orange); }
+.service-detail-offer > a { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); font-size: 11px; font-weight: 750; }
+.service-detail-offer > a svg { color: var(--orange); }
+.service-detail-note { max-width: 900px; margin: 18px 0 0; color: #171717; font-size: 11px; line-height: 1.8; }
+.service-detail-process { background: var(--paper); }
+.service-detail-process-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: center; }
+.service-detail-process-grid > div:first-child > p { max-width: 430px; margin: 22px 0 0; color: #171717; font-size: 13px; line-height: 1.85; }
+.service-detail-process-list { border-top: 1px solid var(--line); }
+.service-detail-process-list > div { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.service-detail-process-list > div > span { color: var(--orange); font-size: 11px; font-weight: 800; }
+.service-detail-process-list h3 { margin: 0 0 6px; font: 750 15px var(--font-manrope); }
+.service-detail-process-list p { margin: 0; color: #171717; font-size: 12px; line-height: 1.75; }
+.service-detail-related { background: #f3f0ec; }
+.service-detail-related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.service-detail-related-card { display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 19px 21px; background: white; border: 1px solid #e9e4dd; }
+.service-detail-related-card > span { display: grid; gap: 6px; }
+.service-detail-related-card strong { font: 750 14px var(--font-manrope); }
+.service-detail-related-card small { color: #171717; font-size: 11px; line-height: 1.6; }
+.service-detail-related-card svg { flex: 0 0 auto; color: var(--orange); }
+.service-detail-cta { background: var(--ink); color: white; }
+.service-detail-cta-inner { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+.service-detail-cta .eyebrow { color: #b2aaa2; }
+.service-detail-cta h2 { margin-bottom: 18px; }
+.service-detail-cta h2 span { color: var(--orange); }
+.service-detail-cta p { max-width: 510px; margin: 0; color: #f0ece7; font-size: 13px; line-height: 1.85; }
+.service-detail-cta .button { flex: 0 0 auto; }
+.engagement-card > a { font-size: 10px; }
+@media (max-width: 1050px) {
+  .service-detail-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-detail-process-grid { gap: 45px; }
+}
+@media (max-width: 720px) {
+  .service-detail-hero { padding: 76px 0 46px; }
+  .service-detail-hero h1 { font-size: clamp(43px, 11vw, 60px); letter-spacing: -3px; }
+  .service-detail-hero-inner > p { font-size: 13px; }
+  .service-detail-hero-bottom { flex-direction: column; align-items: flex-start; }
+  .service-detail-feature-grid, .service-detail-offer-grid, .service-detail-related-grid { grid-template-columns: 1fr; }
+  .service-detail-feature { min-height: auto; }
+  .service-detail-offer-description { min-height: auto; }
+  .service-detail-process-grid { grid-template-columns: 1fr; gap: 28px; }
+  .service-detail-cta-inner { display: block; }
+  .service-detail-cta .button { margin-top: 27px; }
+}
