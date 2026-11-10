@@ -673,3 +673,54 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 .subscription-capacity {
   color: #171717;
 }
+
+
+/* Slightly larger supporting typography for service and pricing pages */
+.sprint-card-top span,
+.subscription-card-top,
+.specialist-detail-top,
+.specialist-hero-note,
+.marketing-hero-note,
+.marketing-visual-top,
+.marketing-visual-bottom {
+  font-size: 10px;
+}
+
+.sprint-deliverables-title,
+.subscription-includes,
+.specialist-scope-label,
+.specialist-deliverable > span,
+.specialist-rate-list > span {
+  font-size: 9px;
+}
+
+.sprint-card-pricing > div > span,
+.sprint-card-pricing > span {
+  font-size: 9px;
+}
+
+.subscription-footer > span,
+.subscription-capacity,
+.specialist-detail-card > a,
+.specialist-rate-list p {
+  font-size: 11px;
+}
+
+.specialist-best-for,
+.specialist-deliverable p,
+.pricing-model p,
+.subscription-note span,
+.marketing-addon-list p,
+.specialist-delivery-points > div > span:last-child {
+  font-size: 12px;
+}
+
+.specialist-detail-card ul,
+.pricing-clarity p {
+  font-size: 11px;
+}
+
+.sprint-card li,
+.subscription-card li {
+  font-size: 12px;
+}
