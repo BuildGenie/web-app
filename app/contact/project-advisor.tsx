@@ -458,8 +458,15 @@ function inferGoal(text: string): Goal | undefined {
 }
 
 function stageQuestion(goal: Goal) {
-  const label = goalChoices.find((item) => item.value === goal)?.label.toLowerCase() ?? "this";
-  return `Got it. Let's put that in context. Where are you with ${label} right now?`;
+  const subjects: Record<Goal, string> = {
+    validate: "the idea",
+    strategy: "the business direction",
+    growth: "marketing and growth",
+    brand: "the brand",
+    technology: "the product or technology",
+    support: "customer and business operations",
+  };
+  return `Got it. Let's put that in context. Where are you with ${subjects[goal]} right now?`;
 }
 
 function needQuestion(goal: Goal) {
