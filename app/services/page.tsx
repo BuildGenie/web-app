@@ -8,6 +8,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
 
 export const metadata = {
@@ -247,7 +248,7 @@ export default function ServicesPage() {
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT&apos;S NEXT</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><LegalLinks /><span>MADE FOR WHAT&apos;S NEXT</span></div>
       </footer>
     </main>
   );
