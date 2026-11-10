@@ -243,7 +243,7 @@ export default function MarketingGrowthPage() {
             <h2>Marketing should create<br /><span>momentum you can measure.</span></h2>
           </div>
           <p>
-            We don't treat marketing as a list of posts or isolated campaigns.
+            We don&apos;t treat marketing as a list of posts or isolated campaigns.
             We connect what a business promises, who it needs to reach, how
             people experience the product and what the data tells us to do next.
             The aim is not activity for its own sake; it is better decisions and
@@ -418,8 +418,8 @@ export default function MarketingGrowthPage() {
         <div className="container marketing-cta-inner">
           <div>
             <Eyebrow>READY TO MOVE FORWARD?</Eyebrow>
-            <h2>Let's make growth<br /><span>part of the plan.</span></h2>
-            <p>Tell us what you're building, what you've tried and where you'd like to go next.</p>
+            <h2>Let&apos;s make growth<br /><span>part of the plan.</span></h2>
+            <p>Tell us what you&apos;re building, what you&apos;ve tried and where you'd like to go next.</p>
           </div>
           <Link className="button button-orange" href="/contact">
             Start a conversation <ArrowUpRight size={17} />
