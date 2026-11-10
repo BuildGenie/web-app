@@ -426,3 +426,81 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
   .marketing-cta-inner { display: block; }
   .marketing-cta .button { margin-top: 27px; }
 }
+
+
+/* Specialist services detail page */
+.capability-link { grid-column: 2 / -1; display: inline-flex; align-items: center; gap: 8px; margin-top: 13px; color: var(--ink); font-size: 10px; font-weight: 750; }
+.capability-link svg { color: var(--orange); }
+.specialist-hero { background: #f6f3ef; padding: 110px 0 70px; }
+.specialist-hero-inner { max-width: 1180px; }
+.specialist-hero h1 { margin: 27px 0 22px; font: 800 clamp(48px, 6vw, 76px)/1.06 var(--font-manrope), sans-serif; letter-spacing: -4px; }
+.specialist-hero h1 span { color: var(--orange); }
+.specialist-hero p { max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+.specialist-hero-note { display: flex; align-items: center; gap: 14px; margin-top: 50px; color: #8b837a; font-size: 8px; font-weight: 750; letter-spacing: 1.4px; }
+.specialist-hero-note span, .specialist-hero-note i { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+.specialist-hero-note i { opacity: .45; }
+.specialist-catalogue { background: var(--paper); }
+.specialist-catalogue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.specialist-detail-card { display: flex; flex-direction: column; min-height: 440px; padding: 24px; background: white; border: 1px solid #e9e4dd; }
+.specialist-detail-top { display: flex; align-items: center; justify-content: space-between; color: #9a938a; font-size: 9px; }
+.specialist-detail-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: var(--orange); background: var(--orange-pale); }
+.specialist-detail-card h3 { margin: 23px 0 7px; font: 750 18px/1.35 var(--font-manrope); }
+.specialist-best-for { min-height: 58px; color: var(--muted); font-size: 11px; line-height: 1.75; }
+.specialist-scope-label, .specialist-deliverable > span { color: #9a938a; font-size: 7px; font-weight: 750; letter-spacing: 1.3px; }
+.specialist-detail-card ul { display: grid; gap: 9px; margin: 12px 0 18px; padding-left: 15px; color: #57534e; font-size: 10px; line-height: 1.6; }
+.specialist-deliverable { margin-top: auto; padding: 13px 0; border-top: 1px solid var(--line); }
+.specialist-deliverable p { margin: 6px 0 0; color: #5f5a54; font-size: 10px; line-height: 1.7; }
+.specialist-detail-card > a { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--line); font-size: 10px; font-weight: 750; }
+.specialist-detail-card > a svg { color: var(--orange); }
+.specialist-pricing { background: #f3f0ec; }
+.pricing-model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pricing-model { padding: 25px; background: white; border: 1px solid #e9e4dd; }
+.pricing-model > span { color: var(--orange); font-size: 10px; font-weight: 750; }
+.pricing-model h3 { margin: 29px 0 10px; font: 750 17px var(--font-manrope); }
+.pricing-model p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+.pricing-clarity { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 18px; padding: 24px; background: #eae5de; }
+.pricing-clarity strong { font: 750 13px var(--font-manrope); }
+.pricing-clarity p { margin: 7px 0 0; color: #6f6962; font-size: 10px; line-height: 1.8; }
+.specialist-delivery { background: var(--paper); }
+.specialist-delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.specialist-delivery-grid > div:first-child > p { max-width: 490px; margin: 22px 0 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.specialist-delivery-points { display: grid; gap: 24px; }
+.specialist-delivery-points > div { display: flex; align-items: flex-start; gap: 13px; color: var(--orange); }
+.specialist-delivery-points > div > span:last-child { display: grid; gap: 5px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.specialist-delivery-points b { color: var(--ink); font: 750 12px var(--font-manrope); }
+.specialist-ownership-check { display: grid; place-items: center; flex: 0 0 19px; height: 19px; border: 1px solid var(--orange); border-radius: 50%; font-size: 12px; line-height: 1; }
+.specialist-cta { background: var(--ink); color: white; }
+.specialist-cta-inner { display: flex; align-items: end; justify-content: space-between; gap: 50px; }
+.specialist-cta .eyebrow { color: #b2aaa2; }
+.specialist-cta h2 { margin-bottom: 20px; }
+.specialist-cta p { max-width: 450px; margin: 0; color: #b2ada7; font-size: 12px; line-height: 1.8; }
+.specialist-cta .button { flex: 0 0 auto; }
+
+@media (max-width: 1050px) {
+  .specialist-catalogue-grid { grid-template-columns: repeat(2, 1fr); }
+  .specialist-delivery-grid { gap: 45px; }
+}
+@media (max-width: 720px) {
+  .specialist-hero { padding: 76px 0 48px; }
+  .specialist-hero h1 { font-size: clamp(44px, 12vw, 60px); letter-spacing: -3px; }
+  .specialist-hero-note { flex-wrap: wrap; gap: 9px; font-size: 7px; }
+  .specialist-catalogue-grid, .pricing-model-grid, .pricing-clarity { grid-template-columns: 1fr; }
+  .specialist-detail-card { min-height: auto; }
+  .specialist-best-for { min-height: auto; }
+  .specialist-delivery-grid { grid-template-columns: 1fr; gap: 35px; }
+  .specialist-cta-inner { display: block; }
+  .specialist-cta .button { margin-top: 27px; }
+}
+
+/* Marketing add-on section */
+.marketing-addons { background: #fff; }
+.marketing-addons-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; align-items: center; }
+.marketing-addons-grid > div:first-child > p { max-width: 410px; margin: 22px 0 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.marketing-addon-list { border-top: 1px solid var(--line); }
+.marketing-addon-list > div { display: flex; gap: 19px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+.marketing-addon-list > div > span { padding-top: 2px; color: var(--orange); font-size: 9px; font-weight: 750; }
+.marketing-addon-list h3 { margin: 0 0 6px; font: 750 14px var(--font-manrope); }
+.marketing-addon-list p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.75; }
+@media (max-width: 720px) {
+  .marketing-addons-grid { grid-template-columns: 1fr; gap: 25px; }
+}
