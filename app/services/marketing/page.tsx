@@ -14,6 +14,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
 
 export const metadata = {
@@ -211,6 +212,7 @@ function Footer() {
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span>
+        <LegalLinks />
         <span>MADE FOR WHAT&apos;S NEXT</span>
       </div>
     </footer>
