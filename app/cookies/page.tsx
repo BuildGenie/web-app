@@ -9,7 +9,7 @@ export const metadata = {
   alternates: { canonical: "/cookies" },
 };
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Eyebrow() {
   return <div className="eyebrow"><span className="eyebrow-line" />SITE PREFERENCES</div>;
 }
 
@@ -21,7 +21,7 @@ export default function CookiesPage() {
       <SiteHeader />
       <section className="legal-hero">
         <div className="container">
-          <Eyebrow>COOKIES & ANALYTICS</Eyebrow>
+          <Eyebrow />
           <h1>Your choices.<br /><span>Clearly explained.</span></h1>
           <p>Last reviewed: 10 November 2026</p>
         </div>
