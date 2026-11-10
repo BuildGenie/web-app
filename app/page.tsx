@@ -92,7 +92,7 @@ export default function Home() {
               that move forward — with the right strategy, growth and technology.
             </p>
             <div className="hero-actions">
-              <Link href="#contact" className="button button-orange">
+              <Link href="/contact" className="button button-orange">
                 Build with us <ArrowUpRight size={17} />
               </Link>
               <Link href="#what-we-do" className="text-link">
@@ -207,7 +207,7 @@ export default function Home() {
               <li><CircleDot size={16} /> Build a repeatable acquisition engine</li>
               <li><CircleDot size={16} /> Turn customer insight into better decisions</li>
             </ul>
-            <Link href="/services#marketing-growth" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
+            <Link href="/services/marketing" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
           </div>
         </div>
       </section>
@@ -289,7 +289,7 @@ export default function Home() {
             <SectionEyebrow>LET&apos;S BUILD SOMETHING MEANINGFUL</SectionEyebrow>
             <h2>What are you<br /><span>working towards?</span></h2>
             <p>Tell us where you are, what you&apos;re trying to achieve and what&apos;s getting in the way. We&apos;ll take it from there.</p>
-            <Link href="mailto:hello@buildgenielabs.com" className="button button-orange">Start a conversation <ArrowUpRight size={17} /></Link>
+            <Link href="/contact" className="button button-orange">Start a conversation <ArrowUpRight size={17} /></Link>
           </div>
           <div className="contact-side-note">GOOD THINGS<br />GET BUILT<br /><span>TOGETHER.</span></div>
         </div>
@@ -303,7 +303,7 @@ export default function Home() {
           </div>
           <div className="footer-links">
             <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="#approach">Our approach</Link><Link href="#ventures">Ventures</Link></div>
-            <div><span>CONNECT</span><Link href="mailto:hello@buildgenielabs.com">Email us</Link><Link href="#contact">Start a project</Link></div>
+            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href="/contact">Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>

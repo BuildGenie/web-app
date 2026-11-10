@@ -8,7 +8,7 @@ const links = [
   { href: "/services", label: "What we do" },
   { href: "/#approach", label: "Our approach" },
   { href: "/#ventures", label: "Ventures" },
-  { href: "/#about", label: "About" },
+  { href: "/about", label: "About" },
 ];
 
 export function SiteHeader() {
@@ -55,7 +55,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Link className="button button-dark nav-cta" href="/#contact">
+        <Link className="button button-dark nav-cta" href="/contact">
           Let&apos;s talk <ArrowUpRight size={16} />
         </Link>
 
@@ -90,7 +90,7 @@ export function SiteHeader() {
           ))}
           <Link
             className="button button-orange"
-            href="/#contact"
+            href="/contact"
             onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
           >
