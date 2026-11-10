@@ -207,7 +207,7 @@ export default function Home() {
               <li><CircleDot size={16} /> Build a repeatable acquisition engine</li>
               <li><CircleDot size={16} /> Turn customer insight into better decisions</li>
             </ul>
-            <Link href="/services#marketing-growth" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
+            <Link href="/services/marketing" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
           </div>
         </div>
       </section>
