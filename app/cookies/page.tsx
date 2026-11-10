@@ -7,6 +7,12 @@ export const metadata = {
   title: "Cookies & Analytics | BuildGenie Labs",
   description: "Information about browser storage and optional analytics on the BuildGenie Labs website.",
   alternates: { canonical: "/cookies" },
+  openGraph: {
+    type: "website",
+    title: "Cookies & Analytics | BuildGenie Labs",
+    description: "Information about browser storage, optional analytics and your privacy choices on the BuildGenie Labs website.",
+    url: "/cookies",
+  },
 };
 
 function Eyebrow() {
