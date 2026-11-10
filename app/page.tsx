@@ -89,7 +89,6 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grid container">
           <div className="hero-copy">
-            <div className="hero-kicker"><span className="pulse-dot" /> BUILT FOR WHAT&apos;S NEXT</div>
             <h1>Good ideas deserve <span>great execution.</span></h1>
             <p className="hero-description">
               We help ambitious founders turn promising ideas into businesses
