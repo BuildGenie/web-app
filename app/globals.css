@@ -646,3 +646,30 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 }
 
 .sprint-pricing-note { max-width: 780px; margin: 16px 0 0; color: #827a71; font-size: 9px; line-height: 1.7; }
+
+/* Improve contrast for small supporting text on service and pricing pages */
+.sprint-card-top span,
+.sprint-deliverables-title,
+.subscription-card-top,
+.subscription-includes,
+.subscription-footer > span,
+.specialist-detail-top,
+.specialist-scope-label,
+.specialist-deliverable > span,
+.specialist-rate-list > span,
+.specialist-hero-note,
+.marketing-hero-note,
+.marketing-visual-top,
+.marketing-visual-bottom,
+.specialist-best-for,
+.specialist-detail-card ul,
+.specialist-deliverable p,
+.specialist-rate-list p,
+.subscription-note span,
+.pricing-model p,
+.pricing-clarity p,
+.sprint-card-pricing > div > span,
+.sprint-card-pricing > span,
+.subscription-capacity {
+  color: #171717;
+}
