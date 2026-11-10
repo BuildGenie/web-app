@@ -19,6 +19,7 @@ import {
   Headset,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { trackEvent } from "@/components/analytics";
 
 type Goal = "validate" | "strategy" | "growth" | "brand" | "technology" | "support";
 type Stage = "idea" | "building" | "launching" | "traction" | "established";
@@ -536,15 +537,22 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
   const [leadEmail, setLeadEmail] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [requestedItem, setRequestedItem] = useState("");
+  const [requestMailto, setRequestMailto] = useState("");
 
   function startRequest(item: string, recommendation: Recommendation | null) {
     setRequestedItem(item);
     setPlan(recommendation);
     setShowConfirmation(false);
+    setRequestMailto("");
     setShowLeadForm(true);
+    trackEvent("advisor_work_with_us_click", {
+      requested_item: item,
+      has_recommendation: Boolean(recommendation),
+    });
   }
   function chooseGoal(value: string, label: string) {
     const goal = value as Goal;
+    trackEvent("advisor_goal_selected", { goal });
     setContext((current) => ({ ...current, goal }));
     setPlan(null);
     setMessages((current) => [
@@ -580,6 +588,12 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
   function chooseNeed(value: string, label: string) {
     const updated = { ...context, need: value };
     const recommendation = makeRecommendation(updated);
+    trackEvent("advisor_recommendation_generated", {
+      goal: updated.goal ?? "unspecified",
+      stage: updated.stage ?? "unspecified",
+      need: updated.need ?? "unspecified",
+      offer_count: recommendation.offers.length,
+    });
     setContext(updated);
     setPlan(recommendation);
     setMessages((current) => [
@@ -606,6 +620,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     if (!text) return;
     setDraft("");
     const userMessage: ChatMessage = { id: makeId(), role: "user", text };
+    trackEvent("advisor_message_sent", { message_length: Math.min(text.length, 2000) });
 
     if (!context.goal) {
       const detected = inferGoal(text);
@@ -694,7 +709,59 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
 
   function submitRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const conversation = messages.map((message) => {
+      const speaker = message.role === "user" ? "VISITOR" : "BUILDGENIE ADVISOR";
+      const sections = [`${speaker}: ${message.text}`];
+      if (message.startingPoint) sections.push(`Selected starting point: ${message.startingPoint}`);
+      if (message.recommendation) {
+        sections.push(
+          `Recommendation: ${message.recommendation.title}`,
+          message.recommendation.offers.map((offer) =>
+            `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`
+          ).join("\\n"),
+          `Why: ${message.recommendation.why}`,
+          `Practical next steps:\\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`
+        );
+      }
+      return sections.join("\\n");
+    }).join("\\n\\n");
+
+    const currentRecommendation = plan
+      ? [
+          plan.title,
+          ...plan.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`),
+          `Why: ${plan.why}`,
+          `Practical next steps:\\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`,
+        ].join("\\n")
+      : "No structured recommendation selected yet.";
+
+    const body = [
+      "BUILDGENIE LABS — PROJECT ADVISOR ENQUIRY",
+      "",
+      `Name: ${leadName}`,
+      `Email: ${leadEmail}`,
+      `Interested in: ${requestedItem || "Initial project conversation"}`,
+      "",
+      "CONVERSATION",
+      conversation,
+      "",
+      "CURRENT RECOMMENDATION",
+      currentRecommendation,
+      "",
+      "Prepared on the BuildGenie Labs website. This email is not sent until you review and press Send.",
+    ].join("\\n").slice(0, 12000);
+
+    const subject = `Project enquiry — ${leadName}`;
+    const mailto = `mailto:hello@buildgenielabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setRequestMailto(mailto);
     setShowConfirmation(true);
+    trackEvent("advisor_request_email_prepared", {
+      has_recommendation: Boolean(plan),
+      requested_item: requestedItem || "initial_conversation",
+    });
+    window.location.href = mailto;
   }
 
   function onComposerKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
@@ -799,19 +866,20 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <div className="advisor-modal-icon"><CheckCircle2 size={20} /></div>
                 <div className="eyebrow"><span className="eyebrow-line" />NEXT STEPS</div>
                 <h2 id="advisor-lead-title">Thank you, {leadName}.</h2>
-                <p>Request submission is not available yet. Your details have not been sent or saved, so we can&apos;t reach out unless you contact us directly.</p>
-                <a className="button button-orange" href="mailto:hello@buildgenielabs.com">Email us instead <ArrowUpRight size={17} /></a>
+                <p>Your email app should open with your details, conversation and recommendation ready to review. Nothing is sent until you press Send.</p>
+                <a className="button button-orange" href={requestMailto || "mailto:hello@buildgenielabs.com"}>Open prepared email <ArrowUpRight size={17} /></a>
+                <p className="advisor-handoff-note">Your conversation is not stored on our servers by this version of the advisor.</p>
               </div>
             ) : (
               <>
                 <div className="advisor-modal-icon"><Mail size={20} /></div>
                 <div className="eyebrow"><span className="eyebrow-line" />LET&apos;S TAKE THE NEXT STEP</div>
                 <h2 id="advisor-lead-title">Work with us.</h2>
-                <p>Request submission is not available yet. Your interest in {requestedItem} and your conversation{plan ? " and recommendation" : ""} will not be sent or saved.</p>
+                <p>Add your name and email. We&apos;ll prepare an email with your conversation, selected engagement and any recommendation so you do not have to start over.</p>
                 <form onSubmit={submitRequest}>
                   <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
                   <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
-                  <button className="button button-orange" type="submit">Continue <ArrowUpRight size={17} /></button>
+                  <button className="button button-orange" type="submit">Prepare request email <ArrowUpRight size={17} /></button>
                 </form>
               </>
             )}
