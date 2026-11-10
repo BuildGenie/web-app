@@ -1104,3 +1104,13 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
   .analytics-consent { left: 12px; right: 12px; bottom: 12px; align-items: stretch; flex-direction: column; gap: 13px; padding: 15px; }
   .analytics-consent-actions { justify-content: flex-start; }
 }
+
+
+.footer-legal-links { display: flex; align-items: center; gap: 14px; margin-left: auto; margin-right: 18px; }
+.footer-legal-links a { color: #a9a29a; font-size: 9px; transition: color .2s; }
+.footer-legal-links a:hover { color: #fff; }
+@media (max-width: 720px) {
+  .footer-bottom { justify-content: flex-start; flex-wrap: wrap; padding: 14px 0; }
+  .footer-legal-links { order: 3; width: 100%; margin: 0; }
+  .footer-bottom > span:last-child { margin-left: auto; }
+}
