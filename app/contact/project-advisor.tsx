@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BarChart3,
-  Check,
   CheckCircle2,
   ChevronRight,
   Compass,
@@ -479,6 +478,8 @@ export function ProjectAdvisor() {
       id: "welcome",
       role: "assistant",
       text: "Hi, I'm the BuildGenie Project Advisor. Think of this as a working session, not a sales form. Tell me what you're trying to do, ask a question or choose a starting point. We'll work through the options together.",
+      choices: goalChoices,
+      action: "goal",
     },
   ]);
   const [draft, setDraft] = useState("");
@@ -608,7 +609,7 @@ export function ProjectAdvisor() {
       setMessages((current) => [
         ...current,
         userMessage,
-        { id: makeId(), role: "assistant", text: needQuestion(updated.goal), choices: needChoices[updated.goal], action: "need" },
+        { id: makeId(), role: "assistant", text: needQuestion(updated.goal ?? "growth"), choices: needChoices[updated.goal ?? "growth"], action: "need" },
       ]);
       return;
     }
@@ -760,6 +761,10 @@ export function ProjectAdvisor() {
               <button className="advisor-send-button" type="submit" aria-label="Send message" disabled={!draft.trim()}><ArrowRight size={18} /></button>
             </div>
           </form>
+          <div className="advisor-conversion-row">
+            <div><strong>Ready to take this further?</strong><small>We'll include the conversation and recommendation in your request.</small></div>
+            <button className="button button-orange" type="button" onClick={() => setShowLeadForm(true)}>Work with us <ArrowUpRight size={17} /></button>
+          </div>
           <div className="advisor-workspace-footer">
             <span><ShieldCheck size={13} /> Your thinking stays in this browser until you choose to reach us.</span>
             <button type="button" onClick={restart}>Start over</button>
