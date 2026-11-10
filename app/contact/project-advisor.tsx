@@ -10,7 +10,6 @@ import {
   Compass,
   Lightbulb,
   Mail,
-  Megaphone,
   MessageCircle,
   Palette,
   Search,
