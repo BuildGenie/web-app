@@ -24,6 +24,21 @@ npm run build
 npm start
 ```
 
+## Cloudflare Workers
+
+The Cloudflare Worker and its self-reference are named `buildgenie-labs`. The
+configuration uses the `buildgenie-labs-opennext-cache` R2 bucket; ensure it
+exists in the target Cloudflare account.
+
+To preview the Worker locally, run `npm run preview`. To build and deploy it
+from an authenticated machine, run `npm run deploy`.
+
+For Cloudflare Workers Builds, connect the repository to the
+`buildgenie-labs` Worker and set the build command to
+`npx opennextjs-cloudflare build` and the deploy command to
+`npx opennextjs-cloudflare deploy`. Commit the configuration and lockfile
+before deploying. Node.js 22.12 or later is required by Wrangler.
+
 ## Notes
 - The homepage is a responsive first implementation.
 - Contact currently uses `mailto:hello@buildgenielabs.com`.
