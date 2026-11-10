@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
+import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
 import {
   ArrowDown,
@@ -363,7 +364,7 @@ export default function Home() {
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT&apos;S NEXT <MoveUpRight size={13} /></span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><LegalLinks /><span>MADE FOR WHAT&apos;S NEXT <MoveUpRight size={13} /></span></div>
       </footer>
     </main>
   );
