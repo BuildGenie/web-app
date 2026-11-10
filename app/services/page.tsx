@@ -15,6 +15,13 @@ export const metadata = {
   title: "Services | BuildGenie Labs",
   description:
     "Explore strategy, validation, marketing, growth, technology and specialist execution services from BuildGenie Labs.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    type: "website",
+    title: "Services | BuildGenie Labs",
+    description: "Explore validation, strategy, marketing, growth, technology, specialist execution and customer support services.",
+    url: "/services",
+  },
 };
 
 const capabilities = [
