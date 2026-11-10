@@ -54,7 +54,7 @@ export default function CookiesPage() {
               <strong>Analytics preference</strong>
               <p>Change whether this browser allows optional website analytics.</p>
             </div>
-            <PreferencesButton />
+            {analyticsConfigured && <PreferencesButton />}
           </div>
           <h2>Change your choice</h2>
           <p>
