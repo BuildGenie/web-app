@@ -719,21 +719,21 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
           `Recommendation: ${message.recommendation.title}`,
           message.recommendation.offers.map((offer) =>
             `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`
-          ).join("\\n"),
+          ).join("\n"),
           `Why: ${message.recommendation.why}`,
-          `Practical next steps:\\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`
+          `Practical next steps:\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`
         );
       }
-      return sections.join("\\n");
-    }).join("\\n\\n");
+      return sections.join("\n");
+    }).join("\n\n");
 
     const currentRecommendation = plan
       ? [
           plan.title,
           ...plan.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`),
           `Why: ${plan.why}`,
-          `Practical next steps:\\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`,
-        ].join("\\n")
+          `Practical next steps:\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`,
+        ].join("\n")
       : "No structured recommendation selected yet.";
 
     const body = [
@@ -750,7 +750,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       currentRecommendation,
       "",
       "Prepared on the BuildGenie Labs website. This email is not sent until you review and press Send.",
-    ].join("\\n").slice(0, 12000);
+    ].join("\n").slice(0, 12000);
 
     const subject = `Project enquiry — ${leadName}`;
     const mailto = `mailto:hello@buildgenielabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
