@@ -4,6 +4,13 @@ import { ServiceLandingPage, type ServicePageConfig } from "@/components/service
 export const metadata = {
   title: "Customer Support Services | BuildGenie Labs",
   description: "Build reliable customer support operations, help content and feedback loops with BuildGenie Labs.",
+  alternates: { canonical: "/services/support" },
+  openGraph: {
+    type: "website",
+    title: "Customer Support Services | BuildGenie Labs",
+    description: "Build dependable customer support operations, help content, workflows and customer feedback loops.",
+    url: "/services/support",
+  },
 };
 
 const config: ServicePageConfig = {
