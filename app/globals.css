@@ -619,3 +619,30 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 
 .about-venture-static { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--line); }
 .about-venture-static > span { display: grid; gap: 5px; }
+
+
+/* Public pricing and rate-card components */
+.sprint-card-pricing { display: flex; justify-content: space-between; align-items: end; gap: 14px; padding: 15px 0 0; margin-top: 17px; border-top: 1px solid var(--line); }
+.sprint-card-pricing > div { display: grid; gap: 4px; }
+.sprint-card-pricing > div > span, .sprint-card-pricing > span { color: #8b837a; font-size: 8px; font-weight: 750; letter-spacing: 1px; }
+.sprint-card-pricing strong { color: var(--orange); font: 800 23px var(--font-manrope); letter-spacing: -.6px; }
+.subscription-price { display: flex; align-items: baseline; gap: 7px; margin: 11px 0 7px; }
+.subscription-price strong { color: var(--orange); font: 800 30px var(--font-manrope); letter-spacing: -1px; }
+.subscription-price span { color: #8b837a; font-size: 10px; }
+.subscription-capacity { margin: 0 0 13px; color: #645e57; font-size: 9px; font-weight: 700; line-height: 1.6; }
+.specialist-rate-list { display: grid; gap: 7px; margin: 2px 0 17px; padding: 13px 0 0; border-top: 1px solid var(--line); }
+.specialist-rate-list > span { color: #9a938a; font-size: 7px; font-weight: 750; letter-spacing: 1.2px; }
+.specialist-rate-list p { margin: 0; color: #57534e; font-size: 9px; line-height: 1.6; }
+.specialist-rate-list p + p { padding-top: 2px; }
+@media (max-width: 1050px) {
+  .specialist-catalogue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .sprint-grid, .subscription-grid, .specialist-catalogue-grid, .pricing-model-grid { grid-template-columns: 1fr; }
+  .sprint-card-pricing { align-items: flex-start; }
+  .subscription-price strong { font-size: 27px; }
+  .specialist-detail-card { min-height: auto; }
+  .pricing-clarity { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.sprint-pricing-note { max-width: 780px; margin: 16px 0 0; color: #827a71; font-size: 9px; line-height: 1.7; }

@@ -26,6 +26,8 @@ const engagements = [
     number: "01",
     label: "Validate",
     type: "One-off engagement",
+    fee: "₦250,000",
+    timeline: "10–15 working days",
     icon: Search,
     headline: "Test the opportunity before you scale it.",
     description:
@@ -34,14 +36,17 @@ const engagements = [
       "Customer and audience discovery",
       "Competitor and alternative landscape",
       "Problem, proposition and message testing",
-      "Evidence summary with key assumptions",
+      "Targeted outreach to a cohort of up to 25 qualified product-trial participants",
+      "Feedback summary with key assumptions",
       "Clear next-step recommendation",
     ],
   },
   {
     number: "02",
-    label: "Strategy",
+    label: "Growth Strategy",
     type: "One-off engagement",
+    fee: "₦250,000",
+    timeline: "10 working days",
     icon: Lightbulb,
     headline: "Turn insight into a focused growth plan.",
     description:
@@ -54,12 +59,32 @@ const engagements = [
       "90-day priorities and measurement framework",
     ],
   },
+  {
+    number: "03",
+    label: "Go-to-Market Strategy",
+    type: "One-off engagement",
+    icon: Megaphone,
+    fee: "₦450,000",
+    timeline: "15–20 working days",
+    headline: "Plan a launch with a clear route to market.",
+    description:
+      "For teams preparing to introduce a product, enter a market or coordinate a focused launch campaign.",
+    deliverables: [
+      "Market and competitor analysis",
+      "Audience, positioning and launch messaging",
+      "Channel mix and launch sequence",
+      "Campaign plan, budget and activity roadmap",
+      "Measurement framework and launch priorities",
+    ],
+  },
 ];
 
 const subscriptions = [
   {
     number: "01",
     name: "Launch",
+    fee: "₦350,000",
+    capacity: "One product · one audience · up to two channels",
     audience: "For startups building their first repeatable acquisition motion",
     summary:
       "A focused monthly programme that helps you get in front of the right people, bring them into the product and learn from their response.",
@@ -75,6 +100,8 @@ const subscriptions = [
   {
     number: "02",
     name: "Growth",
+    fee: "₦650,000",
+    capacity: "Up to two audience segments · up to three channels",
     audience: "For products with early traction ready to improve and expand",
     summary:
       "A broader growth partnership that builds on what is already working and improves the full path from first touch to retained customer.",
@@ -102,7 +129,7 @@ const specialists = [
     icon: Megaphone,
     title: "Social media & content",
     description:
-      "Channel planning, content calendars, copywriting, publishing coordination and community activity.",
+      "Social Media Lite is ₦50,000/month for one platform, up to eight client-supplied content items and scheduling/publishing only. Full management, including creative coordination and community activity, is scoped separately.",
     outputs: "Content calendar, copy, creative and channel reports",
   },
   {
@@ -274,6 +301,10 @@ export default function MarketingGrowthPage() {
                     <span>{item.number} / {item.type.toUpperCase()}</span>
                     <Icon size={22} />
                   </div>
+                  <div className="sprint-card-pricing">
+                    <div><span>PROJECT FEE</span><strong>{item.fee}</strong></div>
+                    <span>{item.timeline}</span>
+                  </div>
                   <h3>{item.label}</h3>
                   <h4>{item.headline}</h4>
                   <p>{item.description}</p>
@@ -290,6 +321,7 @@ export default function MarketingGrowthPage() {
               );
             })}
           </div>
+          <p className="sprint-pricing-note">The cohort size is a planning ceiling, not a guaranteed number of activated users. Recruitment depends on audience availability and product readiness; paid media and participant incentives are budgeted separately.</p>
         </div>
       </section>
 
@@ -315,6 +347,8 @@ export default function MarketingGrowthPage() {
                   <span className="subscription-status">IN-HOUSE DELIVERY</span>
                 </div>
                 <h3>{plan.name}</h3>
+                <div className="subscription-price"><strong>{plan.fee}</strong><span>/ month</span></div>
+                <p className="subscription-capacity">{plan.capacity}</p>
                 <p className="subscription-audience">{plan.audience}</p>
                 <p className="subscription-summary">{plan.summary}</p>
                 <div className="subscription-divider" />
@@ -325,7 +359,7 @@ export default function MarketingGrowthPage() {
                   ))}
                 </ul>
                 <div className="subscription-footer">
-                  <span>Scope and monthly fee agreed before kickoff</span>
+                  <span>Three-month initial term · Paid monthly in advance</span>
                   <Link href="/contact" aria-label={`Discuss the ${plan.name} plan`}>
                     Discuss {plan.name} <ArrowUpRight size={16} />
                   </Link>
@@ -337,7 +371,7 @@ export default function MarketingGrowthPage() {
           <div className="subscription-note">
             <strong>Clear scope. Clear spend.</strong>
             <span>
-              The monthly service fee is agreed against the acquisition objective, channel mix and delivery volume. Quarterly and annual commitments are available at discounted rates. Advertising spend, creator fees, paid tools and other third-party costs are separate and approved with you before commitment. Acquisition targets are agreed from the starting baseline and are tracked transparently; they are not unconditional guarantees of user numbers.
+              Both plans begin with a three-month commitment and are paid monthly in advance. Save 5% with quarterly prepayment or 10% with annual prepayment. Advertising spend, creator fees, paid tools, incentives and other third-party costs are separate and approved with you before commitment. Acquisition targets are agreed from the starting baseline and channel economics, then tracked transparently; they are not unconditional guarantees of user numbers.
             </span>
           </div>
         </div>

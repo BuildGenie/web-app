@@ -32,6 +32,7 @@ const services = [
       "Marketing graphics and digital assets",
     ],
     deliverables: "Approved creative files, editable source assets where agreed, and usage-ready exports.",
+    pricing: ["Brand identity starter kit — ₦250,000", "Full brand identity system — ₦350,000–₦500,000"],
   },
   {
     icon: PenTool,
@@ -45,6 +46,7 @@ const services = [
       "Email, social and product communication",
     ],
     deliverables: "A defined copy set, content document or channel-ready content batch.",
+    pricing: ["10 social graphics — ₦60,000", "Content calendar — ₦50,000", "Website copy (up to 5 pages) — ₦150,000–₦250,000"],
   },
   {
     icon: Megaphone,
@@ -58,6 +60,7 @@ const services = [
       "Community monitoring and monthly reporting",
     ],
     deliverables: "Approved calendar, published content within the agreed volume, and channel report.",
+    pricing: ["Social Media Lite — ₦50,000/month (one platform; up to 8 client-supplied items; scheduling/publishing only)", "Full management — ₦120,000/month (one platform) · ₦180,000/month (two platforms)"],
   },
   {
     icon: BarChart3,
@@ -71,6 +74,7 @@ const services = [
       "Conversion tracking and performance analysis",
     ],
     deliverables: "Campaign setup, experiment log, optimisation actions and performance report.",
+    pricing: ["Paid ads setup — ₦100,000 (one platform)", "Management — ₦150,000/month (one platform) · ₦250,000/month (two platforms)"],
   },
   {
     icon: Search,
@@ -84,6 +88,7 @@ const services = [
       "Insight synthesis and prioritised recommendations",
     ],
     deliverables: "Research brief, findings summary, supporting evidence and recommended next steps.",
+    pricing: ["Competitor research/audit — ₦100,000", "Customer research sprint — ₦250,000–₦350,000"],
   },
   {
     icon: Headset,
@@ -97,6 +102,7 @@ const services = [
       "Ticket handling and recurring issue reporting",
     ],
     deliverables: "Support playbook, response templates, agreed coverage and issue insights.",
+    pricing: ["Customer support playbook & FAQ setup — ₦150,000", "Ongoing customer support — from ₦180,000/month"],
   },
   {
     icon: Layers3,
@@ -110,6 +116,7 @@ const services = [
       "Launch monitoring and post-launch review",
     ],
     deliverables: "Launch plan, asset checklist, activity tracker and retrospective.",
+    pricing: ["Launch/campaign operations — ₦250,000–₦450,000"],
   },
   {
     icon: Settings2,
@@ -123,6 +130,7 @@ const services = [
       "Dashboard and reporting setup",
     ],
     deliverables: "Tracking plan, configured reports or dashboard, and measurement notes.",
+    pricing: ["Marketing analytics/tracking setup — ₦120,000–₦200,000"],
   },
 ];
 
@@ -180,8 +188,7 @@ export default function SpecialistServicesPage() {
               <h2>Specific skills.<br /><span>Clearly scoped outputs.</span></h2>
             </div>
             <p>
-              Every engagement starts with a brief. We agree on the output,
-              volume, timeline, review process and ownership before work begins.
+              Published figures are guide rates in naira. Every engagement starts with a brief, and we confirm the deliverables, volume, timeline, review process and final fee before work begins.
             </p>
           </div>
 
@@ -203,6 +210,10 @@ export default function SpecialistServicesPage() {
                   <div className="specialist-deliverable">
                     <span>EXAMPLE OUTPUT</span>
                     <p>{service.deliverables}</p>
+                  </div>
+                  <div className="specialist-rate-list">
+                    <span>GUIDE PRICING</span>
+                    {service.pricing.map((rate) => <p key={rate}>{rate}</p>)}
                   </div>
                   <Link href="/contact">Discuss this service <ArrowUpRight size={15} /></Link>
                 </article>
@@ -234,8 +245,8 @@ export default function SpecialistServicesPage() {
             ))}
           </div>
           <div className="pricing-clarity">
-            <div><strong>Every quote makes the boundaries clear.</strong><p>You&apos;ll see the deliverables, assumptions, number of review rounds, timeline, responsibilities and exclusions before approving the work.</p></div>
-            <div><strong>External costs stay separate.</strong><p>Media budgets, paid tools, stock assets, creator fees, printing and other third-party costs are itemised and approved before commitment.</p></div>
+            <div><strong>Clear scope and payment terms.</strong><p>One-off projects are typically billed 70% to start and 30% before final handover. Monthly services are paid in advance. Final quotes specify deliverables, review rounds, timing, responsibilities and applicable taxes.</p></div>
+            <div><strong>External costs stay separate.</strong><p>Ad spend, paid tools, stock assets, creator fees, printing, incentives and other third-party costs are itemised and approved before commitment. Scope additions are quoted separately.</p></div>
           </div>
         </div>
       </section>
