@@ -67,7 +67,7 @@ const subscriptions = [
       "Monthly growth plan and campaign calendar",
       "Execution across an agreed channel mix",
       "Audience, offer and message experiments",
-      "An agreed acquisition target and tracking plan",
+      "A monthly user-acquisition target agreed before kickoff, with transparent tracking",
       "User feedback and friction insights",
       "Monthly performance review and next actions",
     ],
@@ -84,6 +84,7 @@ const subscriptions = [
       "Continuous acquisition and conversion experiments",
       "Activation and retention improvement initiatives",
       "Customer feedback synthesis and insight",
+      "Acquisition, activation and retention scorecard",
       "Performance dashboard, monthly review and quarterly direction",
     ],
   },
@@ -336,10 +337,7 @@ export default function MarketingGrowthPage() {
           <div className="subscription-note">
             <strong>Clear scope. Clear spend.</strong>
             <span>
-              The monthly service fee is agreed against the acquisition
-              objective, channel mix and delivery volume. Advertising spend,
-              creator fees and other third-party costs are separate and are
-              approved with you before commitment.
+              The monthly service fee is agreed against the acquisition objective, channel mix and delivery volume. Quarterly and annual commitments are available at discounted rates. Advertising spend, creator fees, paid tools and other third-party costs are separate and approved with you before commitment. Acquisition targets are agreed from the starting baseline and are tracked transparently; they are not unconditional guarantees of user numbers.
             </span>
           </div>
         </div>
@@ -375,6 +373,23 @@ export default function MarketingGrowthPage() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+
+      <section className="marketing-addons section-pad">
+        <div className="container marketing-addons-grid">
+          <div>
+            <Eyebrow>EXTEND YOUR GROWTH TEAM</Eyebrow>
+            <h2>Add the support<br /><span>your next stage needs.</span></h2>
+            <p>Some capabilities are best included in a monthly plan; others work better as a clearly scoped add-on. We agree the capacity and outputs before the month begins.</p>
+          </div>
+          <div className="marketing-addon-list">
+            <div><span>01</span><div><h3>Social media management</h3><p>Content calendar, creative coordination, publishing and community activity.</p></div></div>
+            <div><span>02</span><div><h3>Customer support</h3><p>Defined support coverage, response workflows, escalation and recurring issue insights.</p></div></div>
+            <div><span>03</span><div><h3>Creative production</h3><p>Campaign concepts, graphics, short-form content and conversion-focused assets.</p></div></div>
+            <div><span>04</span><div><h3>Landing pages & conversion assets</h3><p>Focused landing pages, lead capture and onboarding touchpoints that support campaigns.</p></div></div>
           </div>
         </div>
       </section>
