@@ -5,7 +5,6 @@ import {
   ChartNoAxesCombined,
   Check,
   Compass,
-  Lightbulb,
   Workflow,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
@@ -123,7 +122,7 @@ export default function ServicesPage() {
           <h1>From the first question<br />to <span>what comes next.</span></h1>
           <p>
             BuildGenie Labs brings strategy, marketing, technology and execution
-            together. Start with the challenge in front of you; we'll help work
+            together. Start with the challenge in front of you; we&apos;ll help work
             out what it takes to move forward.
           </p>
           <div className="services-hero-meta">
@@ -141,7 +140,7 @@ export default function ServicesPage() {
             </div>
             <p>
               We assemble the right mix of thinking and execution around your
-              goals. You don't need to buy everything to get started.
+              goals. You don&apos;t need to buy everything to get started.
             </p>
           </div>
 
@@ -215,11 +214,11 @@ export default function ServicesPage() {
       <section className="services-cta section-pad">
         <div className="container services-cta-inner">
           <div>
-            <Eyebrow>LET'S FIND THE RIGHT STARTING POINT</Eyebrow>
+            <Eyebrow>LET&apos;S FIND THE RIGHT STARTING POINT</Eyebrow>
             <h2>Not sure what you need<br /><span>just yet?</span></h2>
             <p>
-              That's a good place to start. Tell us what you're working on and
-              we'll help you identify the next practical step.
+              That&apos;s a good place to start. Tell us what you&apos;re working on and
+              we&apos;ll help you identify the next practical step.
             </p>
           </div>
           <Link className="button button-orange" href="/contact">
@@ -243,7 +242,7 @@ export default function ServicesPage() {
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT'S NEXT</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} BuildGenie Labs. All rights reserved.</span><span>MADE FOR WHAT&apos;S NEXT</span></div>
       </footer>
     </main>
   );
