@@ -1,17 +1,14 @@
 import Link from "next/link";
+import { SiteHeader } from "@/components/site-header";
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUpRight,
-  AudioLines,
   Blocks,
   ChartNoAxesCombined,
-  ChevronRight,
   CircleDot,
   Compass,
   Layers3,
   Lightbulb,
-  Menu,
   MoveUpRight,
   Sparkles,
   Target,
@@ -83,26 +80,7 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
 export default function Home() {
   return (
     <main>
-      <header className="site-header">
-        <div className="nav-wrap container">
-          <Link className="brand" href="/" aria-label="BuildGenie Labs home">
-            <BrandMark />
-            <span className="brand-name">buildgenie<span>labs</span></span>
-          </Link>
-          <nav className="desktop-nav" aria-label="Main navigation">
-            <Link href="#what-we-do">What we do</Link>
-            <Link href="#approach">Our approach</Link>
-            <Link href="#ventures">Ventures</Link>
-            <Link href="#about">About</Link>
-          </nav>
-          <Link className="button button-dark nav-cta" href="#contact">
-            Let&apos;s talk <ArrowUpRight size={16} />
-          </Link>
-          <button className="mobile-menu" aria-label="Open navigation menu">
-            <Menu size={22} />
-          </button>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero">
         <div className="hero-grid container">
@@ -193,7 +171,7 @@ export default function Home() {
                   <div className="tag-list">
                     {service.tags.map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
-                  <Link href="#contact" className="card-link" aria-label={`Discuss ${service.title}`}>
+                  <Link href="/services" className="card-link" aria-label={`Discuss ${service.title}`}>
                     Explore capability <ArrowUpRight size={16} />
                   </Link>
                 </article>
@@ -229,7 +207,7 @@ export default function Home() {
               <li><CircleDot size={16} /> Build a repeatable acquisition engine</li>
               <li><CircleDot size={16} /> Turn customer insight into better decisions</li>
             </ul>
-            <Link href="#contact" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
+            <Link href="/services#marketing-growth" className="button button-orange">Explore growth services <ArrowUpRight size={17} /></Link>
           </div>
         </div>
       </section>
@@ -324,7 +302,7 @@ export default function Home() {
             <p>Build with clarity.<br />Grow with intent.</p>
           </div>
           <div className="footer-links">
-            <div><span>EXPLORE</span><Link href="#what-we-do">What we do</Link><Link href="#approach">Our approach</Link><Link href="#ventures">Ventures</Link></div>
+            <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="#approach">Our approach</Link><Link href="#ventures">Ventures</Link></div>
             <div><span>CONNECT</span><Link href="mailto:hello@buildgenielabs.com">Email us</Link><Link href="#contact">Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
