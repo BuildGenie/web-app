@@ -2,7 +2,7 @@ export type AnalyticsEventParams = Record<string, string | number | boolean | nu
 
 declare global {
   interface Window {
-    dataLayer?: IArguments[] | unknown[];
+    dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
 }
