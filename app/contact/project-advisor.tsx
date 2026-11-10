@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent, type KeyboardEvent } from "react";
+import { useState, type FormEvent, type KeyboardEvent } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -10,7 +10,6 @@ import {
   Compass,
   Lightbulb,
   Mail,
-  MessageCircle,
   Palette,
   Search,
   ShieldCheck,
@@ -39,6 +38,7 @@ type ChatMessage = {
   choices?: Choice[];
   action?: ChoiceAction;
   recommendation?: Recommendation;
+  startingPoint?: string;
 };
 
 type Offer = {
@@ -457,6 +457,38 @@ function inferGoal(text: string): Goal | undefined {
   return undefined;
 }
 
+function inferStage(text: string): Stage | undefined {
+  const value = text.toLowerCase();
+  if (/\b(established|running a business|been in business|operating for|existing business)\b/.test(value)) return "established";
+  if (/\b(traction|launched|already live|existing customers|have customers|paying customers)\b/.test(value)) return "traction";
+  if (/\b(launching|launch soon|launching soon|preparing to launch|about to launch|ready to launch)\b/.test(value)) return "launching";
+  if (/\b(building|developing|testing|prototype|mvp)\b/.test(value)) return "building";
+  if (/\b(idea|concept|just starting|early stage|not started|haven't started)\b/.test(value)) return "idea";
+  return undefined;
+}
+
+function inferNeed(goal: Goal, text: string): string {
+  const value = text.toLowerCase();
+  const patterns: Partial<Record<Goal, [RegExp, string][]>> = {
+    validate: [[/\b(audience|early adopters)\b/, "audience"], [/\b(next step|what to do next)\b/, "direction"]],
+    strategy: [[/\b(positioning|position)\b/, "positioning"], [/\b(launch|market entry)\b/, "launch"]],
+    growth: [[/\b(conversion|retention|drop.?off)\b/, "conversion"], [/\b(channels|multiple platforms)\b/, "channels"]],
+    brand: [[/\b(social|instagram|facebook)\b/, "social"], [/\b(website|copy|landing page)\b/, "website-copy"], [/\b(positioning|position)\b/, "positioning"]],
+    support: [[/\b(analytics|tracking|reporting)\b/, "analytics"], [/\b(launch|campaign)\b/, "operations"], [/\b(ongoing|conversations|inquiries|enquiries)\b/, "ongoing"]],
+  };
+  return patterns[goal]?.find(([pattern]) => pattern.test(value))?.[1] ?? text;
+}
+
+function welcomeMessage(): ChatMessage {
+  return {
+    id: makeId(),
+    role: "assistant",
+    text: "Hi! Let's work through this together. What are you trying to build, solve or improve? You can describe it in your own words or choose a starting point below.",
+    choices: goalChoices,
+    action: "goal",
+  };
+}
+
 function stageQuestion(goal: Goal) {
   const subjects: Record<Goal, string> = {
     validate: "the idea",
@@ -485,35 +517,36 @@ function makeId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-export function ProjectAdvisor() {
+export function ProjectAdvisor({ initialService, initialSelection }: { initialService: string; initialSelection: string }) {
   const [context, setContext] = useState<AdvisorContext>({ notes: [] });
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: "welcome",
-      role: "assistant",
-      text: "Hi, I'm the BuildGenie Project Advisor. Think of this as a working session, not a sales form. Tell me what you're trying to do, ask a question or choose a starting point. We'll work through the options together.",
-      choices: goalChoices,
-      action: "goal",
-    },
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => initialService ? [{
+    id: makeId(),
+    role: "assistant",
+    text: initialSelection
+      ? `You're interested in ${initialSelection} from ${initialService}. We can discuss this with you, or you can tell me more and explore your options.`
+      : `You've chosen ${initialService} as a starting point. We can discuss this with you, or you can tell me more and explore your options.`,
+    startingPoint: initialSelection || initialService,
+    choices: goalChoices,
+    action: "goal",
+  }] : [welcomeMessage()]);
   const [draft, setDraft] = useState("");
   const [plan, setPlan] = useState<Recommendation | null>(null);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
-  const [requestPrepared, setRequestPrepared] = useState(false);
-  const progress = useMemo(() => {
-    if (!context.goal) return 0;
-    if (!context.stage) return 1;
-    if (!context.need) return 2;
-    return 3;
-  }, [context]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [requestedItem, setRequestedItem] = useState("");
 
+  function startRequest(item: string, recommendation: Recommendation | null) {
+    setRequestedItem(item);
+    setPlan(recommendation);
+    setShowConfirmation(false);
+    setShowLeadForm(true);
+  }
   function chooseGoal(value: string, label: string) {
     const goal = value as Goal;
-    setContext({ goal, notes: [] });
+    setContext((current) => ({ ...current, goal }));
     setPlan(null);
-    setRequestPrepared(false);
     setMessages((current) => [
       ...current,
       { id: makeId(), role: "user", text: label },
@@ -549,7 +582,6 @@ export function ProjectAdvisor() {
     const recommendation = makeRecommendation(updated);
     setContext(updated);
     setPlan(recommendation);
-    setRequestPrepared(false);
     setMessages((current) => [
       ...current,
       { id: makeId(), role: "user", text: label },
@@ -578,7 +610,7 @@ export function ProjectAdvisor() {
     if (!context.goal) {
       const detected = inferGoal(text);
       if (detected) {
-        setContext({ goal: detected, notes: [text] });
+        setContext((current) => ({ ...current, goal: detected, notes: [...current.notes, text] }));
         setPlan(null);
         setMessages((current) => [
           ...current,
@@ -602,34 +634,49 @@ export function ProjectAdvisor() {
       return;
     }
 
+    const goal = context.goal;
     const updated = { ...context, notes: [...context.notes, text] };
-    setContext(updated);
     if (!updated.stage) {
+      const stage = inferStage(text);
+      if (stage) {
+        setContext({ ...updated, stage });
+        setMessages((current) => [
+          ...current,
+          userMessage,
+          { id: makeId(), role: "assistant", text: needQuestion(goal), choices: needChoices[goal], action: "need" },
+        ]);
+        return;
+      }
+      setContext(updated);
       setMessages((current) => [
         ...current,
         userMessage,
-        { id: makeId(), role: "assistant", text: "That context helps. First, where are you in the journey?", choices: stageChoices, action: "stage" },
+        { id: makeId(), role: "assistant", text: "I'm not sure where you are in the journey yet. Are you shaping an idea, building, launching or already operating? You can also choose below.", choices: stageChoices, action: "stage" },
       ]);
       return;
     }
     if (!updated.need) {
+      const withNeed = { ...updated, need: inferNeed(goal, text) };
+      const recommendation = makeRecommendation(withNeed);
+      setContext(withNeed);
+      setPlan(recommendation);
       setMessages((current) => [
         ...current,
         userMessage,
-        { id: makeId(), role: "assistant", text: needQuestion(updated.goal ?? "growth"), choices: needChoices[updated.goal ?? "growth"], action: "need" },
+        { id: makeId(), role: "assistant", text: "Thanks for sharing that. Based on the area and stage you've described, here's a starting point to consider.", recommendation },
       ]);
       return;
     }
+    setContext(updated);
     const recommendation = makeRecommendation(updated);
     setPlan(recommendation);
-    setRequestPrepared(false);
     setMessages((current) => [
       ...current,
       userMessage,
       {
         id: makeId(),
         role: "assistant",
-        text: "That's helpful context. I've adjusted the recommendation to account for it. Here's the direction I'd explore now.",
+        text: "Thanks for adding that context. Here's a starting direction based on what you've shared so far.",
         recommendation,
       },
     ]);
@@ -639,42 +686,15 @@ export function ProjectAdvisor() {
     setContext({ notes: [] });
     setPlan(null);
     setShowLeadForm(false);
-    setRequestPrepared(false);
-    setMessages([
-      {
-        id: makeId(),
-        role: "assistant",
-        text: "Let's take a fresh look. What are you trying to build, solve or improve? Choose a starting point or describe it in your own words.",
-      },
-    ]);
+    setShowConfirmation(false);
+    setRequestedItem("");
+    setDraft("");
+    setMessages([welcomeMessage()]);
   }
 
   function submitRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const transcript = messages
-      .map((message) => `${message.role === "user" ? "YOU" : "BUILDGENIE ADVISOR"}: ${message.text}`)
-      .join("\n\n");
-    const recommended = plan
-      ? `${plan.title}\n${plan.offers.map((offer) => `- ${offer.name}: ${offer.price} ${offer.cadence}`).join("\n")}\n\nWhy: ${plan.why}\n\nSuggested next step:\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`
-      : "The visitor would like to continue the conversation. No recommendation has been generated yet.";
-    const body = [
-      "BUILDGENIE PROJECT ADVISOR — NEW PROJECT REQUEST",
-      "",
-      `Name: ${leadName}`,
-      `Email: ${leadEmail}`,
-      "",
-      "CONVERSATION",
-      transcript,
-      "",
-      "BUILDGENIE'S INITIAL RECOMMENDATION",
-      recommended,
-      "",
-      "This request was prepared from the website's browser-based Project Advisor.",
-    ].join("\n");
-    const subject = `Project conversation — ${leadName}`;
-    setShowLeadForm(false);
-    setRequestPrepared(true);
-    window.location.href = `mailto:hello@buildgenielabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setShowConfirmation(true);
   }
 
   function onComposerKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
@@ -695,39 +715,26 @@ export function ProjectAdvisor() {
             Think aloud, explore possibilities and get a practical direction
             grounded in what BuildGenie actually does.
           </p>
-          <div className="advisor-promise-list">
-            <div><span><Lightbulb size={18} /></span><p><strong>Space to think</strong>Bring an early idea, a business problem or a question you&apos;re still figuring out.</p></div>
-            <div><span><Compass size={18} /></span><p><strong>Useful direction</strong>Get practical next steps and relevant options, even if you decide to do the work yourself.</p></div>
-            <div><span><ShieldCheck size={18} /></span><p><strong>Clear and transparent</strong>Recommendations use our published services and guide prices. No pressure to buy.</p></div>
-          </div>
-          <div className="advisor-capability-note">
-            <span>ONE CONNECTED TEAM</span>
-            <div><i>STRATEGY</i><b>·</b><i>GROWTH</i><b>·</b><i>TECHNOLOGY</i><b>·</b><i>EXECUTION</i></div>
-          </div>
-          <a className="advisor-email-link" href="mailto:hello@buildgenielabs.com">Prefer email? hello@buildgenielabs.com <ArrowUpRight size={15} /></a>
         </div>
 
         <div className="advisor-workspace">
-          <div className="advisor-workspace-top">
-            <div className="advisor-workspace-brand">
-              <span className="advisor-orb"><Sparkles size={17} /></span>
-              <span><strong>Project Advisor</strong><small>YOUR THINKING PARTNER AT BUILDGENIE</small></span>
-            </div>
-            <div className="advisor-progress">
-              <span>{progress === 3 ? "DIRECTION READY" : `DISCOVERY 0${progress} / 03`}</span>
-              <div><i style={{ width: `${progress / 3 * 100}%` }} /></div>
-            </div>
-          </div>
-
           <div className="advisor-chat-body" aria-live="polite">
-            <div className="advisor-session-note"><span /> A WORKING SESSION · NO SIGN-UP REQUIRED</div>
-            {messages.map((message) => (
+            {messages.map((message, index) => (
               <div className={`advisor-message advisor-message-${message.role}`} key={message.id}>
                 {message.role === "assistant" && <span className="advisor-avatar"><Sparkles size={14} /></span>}
                 <div className="advisor-message-content">
                   <div className="advisor-message-label">{message.role === "user" ? "YOU" : "BUILDGENIE ADVISOR"}</div>
                   <p>{message.text}</p>
-                  {message.choices && (
+                  {message.startingPoint && (
+                    <div className="advisor-starting-point">
+                      <span>YOUR SELECTED STARTING POINT</span>
+                      <strong>{message.startingPoint}</strong>
+                      <button className="button button-orange" type="button" onClick={() => startRequest(message.startingPoint!, null)}>
+                        Work with us <ArrowUpRight size={17} />
+                      </button>
+                    </div>
+                  )}
+                  {message.choices && index === messages.length - 1 && (
                     <div className={`advisor-choice-grid ${message.action === "goal" ? "advisor-choice-goals" : ""}`}>
                       {message.choices.map((choice) => {
                         const Icon = (choice as Choice & { icon?: LucideIcon }).icon;
@@ -741,16 +748,10 @@ export function ProjectAdvisor() {
                       })}
                     </div>
                   )}
-                  {message.recommendation && <RecommendationCard recommendation={message.recommendation} />}
+                  {message.recommendation && <RecommendationCard recommendation={message.recommendation} onWorkWithUs={startRequest} />}
                 </div>
               </div>
             ))}
-            {requestPrepared && (
-              <div className="advisor-request-status" role="status">
-                <CheckCircle2 size={17} />
-                <span><strong>Your request is ready.</strong> Your email app should open with the conversation attached. Review it and send to complete the handoff. If it doesn&apos;t open, email <a href="mailto:hello@buildgenielabs.com">hello@buildgenielabs.com</a>.</span>
-              </div>
-            )}
           </div>
 
           <form className="advisor-composer" onSubmit={handleSend}>
@@ -761,43 +762,59 @@ export function ProjectAdvisor() {
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
               onKeyDown={onComposerKeyDown}
-              placeholder="Add context, ask a question or explore another idea..."
+              placeholder="What are you trying to build, solve or improve?"
             />
             <div className="advisor-composer-bottom">
               <span>Press Enter to send · Shift + Enter for a new line</span>
               <button className="advisor-send-button" type="submit" aria-label="Send message" disabled={!draft.trim()}><ArrowRight size={18} /></button>
             </div>
           </form>
-          <div className="advisor-conversion-row">
-            <div><strong>Ready to take this further?</strong><small>We&apos;ll include the conversation and recommendation in your request.</small></div>
-            <button className="button button-orange" type="button" onClick={() => setShowLeadForm(true)}>Work with us <ArrowUpRight size={17} /></button>
-          </div>
+
           <div className="advisor-workspace-footer">
             <span><ShieldCheck size={13} /> Your thinking stays in this browser until you choose to reach us.</span>
             <button type="button" onClick={restart}>Start over</button>
           </div>
         </div>
-      </div>
 
-      <div className="container advisor-bottom-strip">
-        <div><span><MessageCircle size={18} /></span><p><strong>Not ready to work with us?</strong> That&apos;s fine. Use the session to clarify your thinking and take the recommendations with you.</p></div>
-        <a href="/services">Explore the full service catalogue <ArrowUpRight size={15} /></a>
+        <div className="advisor-details">
+          <div className="advisor-promise-list">
+            <div><span><Lightbulb size={18} /></span><p><strong>Space to think</strong>Bring an early idea, a business problem or a question you&apos;re still figuring out.</p></div>
+            <div><span><Compass size={18} /></span><p><strong>Useful direction</strong>Get practical next steps and relevant options, even if you decide to do the work yourself.</p></div>
+            <div><span><ShieldCheck size={18} /></span><p><strong>Clear and transparent</strong>Recommendations use our published services and guide prices. No pressure to buy.</p></div>
+          </div>
+          <div className="advisor-capability-note">
+            <span>ONE CONNECTED TEAM</span>
+            <div><i>STRATEGY</i><b>·</b><i>GROWTH</i><b>·</b><i>TECHNOLOGY</i><b>·</b><i>EXECUTION</i></div>
+          </div>
+          <a className="advisor-email-link" href="mailto:hello@buildgenielabs.com">Prefer email? hello@buildgenielabs.com <ArrowUpRight size={15} /></a>
+        </div>
       </div>
 
       {showLeadForm && (
         <div className="advisor-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setShowLeadForm(false); }}>
           <div className="advisor-lead-modal" role="dialog" aria-modal="true" aria-labelledby="advisor-lead-title">
             <button type="button" className="advisor-modal-close" onClick={() => setShowLeadForm(false)} aria-label="Close"><X size={19} /></button>
-            <div className="advisor-modal-icon"><Mail size={20} /></div>
-            <div className="eyebrow"><span className="eyebrow-line" />LET&apos;S TAKE THE NEXT STEP</div>
-            <h2 id="advisor-lead-title">Work with us.</h2>
-            <p>Your conversation and the initial recommendation will be included, so you won&apos;t have to explain everything again.</p>
-            <form onSubmit={submitRequest}>
-              <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
-              <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
-              <button className="button button-orange" type="submit">Submit request <ArrowUpRight size={17} /></button>
-            </form>
-            <small>This opens an email draft addressed to BuildGenie. Nothing is sent until you review and send it.</small>
+            {showConfirmation ? (
+              <div role="status">
+                <div className="advisor-modal-icon"><CheckCircle2 size={20} /></div>
+                <div className="eyebrow"><span className="eyebrow-line" />NEXT STEPS</div>
+                <h2 id="advisor-lead-title">Thank you, {leadName}.</h2>
+                <p>Request submission is not available yet. Your details have not been sent or saved, so we can&apos;t reach out unless you contact us directly.</p>
+                <a className="button button-orange" href="mailto:hello@buildgenielabs.com">Email us instead <ArrowUpRight size={17} /></a>
+              </div>
+            ) : (
+              <>
+                <div className="advisor-modal-icon"><Mail size={20} /></div>
+                <div className="eyebrow"><span className="eyebrow-line" />LET&apos;S TAKE THE NEXT STEP</div>
+                <h2 id="advisor-lead-title">Work with us.</h2>
+                <p>Request submission is not available yet. Your interest in {requestedItem} and your conversation{plan ? " and recommendation" : ""} will not be sent or saved.</p>
+                <form onSubmit={submitRequest}>
+                  <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
+                  <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
+                  <button className="button button-orange" type="submit">Continue <ArrowUpRight size={17} /></button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -805,7 +822,7 @@ export function ProjectAdvisor() {
   );
 }
 
-function RecommendationCard({ recommendation }: { recommendation: Recommendation }) {
+function RecommendationCard({ recommendation, onWorkWithUs }: { recommendation: Recommendation; onWorkWithUs: (item: string, recommendation: Recommendation) => void }) {
   return (
     <div className="advisor-recommendation">
       <div className="advisor-recommendation-heading">
@@ -824,7 +841,10 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
               <div><h4>{offer.name}</h4><p>{offer.description}</p></div>
               <div className="advisor-offer-price"><strong>{offer.price}</strong><small>{offer.cadence}</small></div>
             </div>
-            <a href={offer.href}>View engagement <ArrowUpRight size={14} /></a>
+            <div className="advisor-offer-actions">
+              <a href={offer.href}>View engagement <ArrowUpRight size={14} /></a>
+              <button type="button" onClick={() => onWorkWithUs(offer.name, recommendation)}>Work with us <ArrowUpRight size={14} /></button>
+            </div>
           </article>
         ))}
       </div>

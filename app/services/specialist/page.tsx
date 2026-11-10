@@ -12,6 +12,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { advisorLink } from "@/components/advisor-link";
 
 export const metadata = {
   title: "Specialist Services | BuildGenie Labs",
@@ -215,7 +216,7 @@ export default function SpecialistServicesPage() {
                     <span>GUIDE PRICING</span>
                     {service.pricing.map((rate) => <p key={rate}>{rate}</p>)}
                   </div>
-                  <Link href="/contact">Discuss this service <ArrowUpRight size={15} /></Link>
+                  <Link href={advisorLink("Specialist services", service.title)}>Discuss this service <ArrowUpRight size={15} /></Link>
                 </article>
               );
             })}
@@ -278,7 +279,7 @@ export default function SpecialistServicesPage() {
             <h2>Let&apos;s scope the work<br /><span>before we start.</span></h2>
             <p>Share the outcome you need. We&apos;ll come back with a practical scope and a clear commercial proposal.</p>
           </div>
-          <Link className="button button-orange" href="/contact">Request a proposal <ArrowUpRight size={17} /></Link>
+          <Link className="button button-orange" href={advisorLink("Specialist services")}>Request a proposal <ArrowUpRight size={17} /></Link>
         </div>
       </section>
 
@@ -293,7 +294,7 @@ export default function SpecialistServicesPage() {
           </div>
           <div className="footer-links">
             <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="/services/marketing">Marketing & growth</Link><Link href="/#approach">Our approach</Link></div>
-            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href="/contact">Start a project</Link></div>
+            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href={advisorLink("Start a project")}>Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>

@@ -14,6 +14,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { advisorLink } from "@/components/advisor-link";
 
 export const metadata = {
   title: "Marketing & Growth | BuildGenie Labs",
@@ -200,7 +201,7 @@ function Footer() {
           <div>
             <span>CONNECT</span>
             <Link href="/contact">Email us</Link>
-            <Link href="/contact">Start a project</Link>
+            <Link href={advisorLink("Start a project")}>Start a project</Link>
           </div>
         </div>
         <div className="footer-note">
@@ -232,7 +233,7 @@ export default function MarketingGrowthPage() {
               hands-on execution.
             </p>
             <div className="marketing-hero-actions">
-              <Link className="button button-orange" href="/contact">
+              <Link className="button button-orange" href={advisorLink("Marketing & growth")}>
                 Talk about growth <ArrowUpRight size={17} />
               </Link>
               <Link className="text-link" href="#subscriptions">
@@ -314,7 +315,7 @@ export default function MarketingGrowthPage() {
                       <li key={deliverable}><Check size={15} />{deliverable}</li>
                     ))}
                   </ul>
-                  <Link href="/contact" className="inline-link">
+                  <Link href={advisorLink("Marketing & growth", item.label)} className="inline-link">
                     Scope this engagement <ArrowUpRight size={16} />
                   </Link>
                 </article>
@@ -360,7 +361,7 @@ export default function MarketingGrowthPage() {
                 </ul>
                 <div className="subscription-footer">
                   <span>Three-month initial term · Paid monthly in advance</span>
-                  <Link href="/contact" aria-label={`Discuss the ${plan.name} plan`}>
+                  <Link href={advisorLink("Marketing & growth", `${plan.name} plan`)} aria-label={`Discuss the ${plan.name} plan`}>
                     Discuss {plan.name} <ArrowUpRight size={16} />
                   </Link>
                 </div>
@@ -403,7 +404,7 @@ export default function MarketingGrowthPage() {
                     <span>EXAMPLE OUTPUTS</span>
                     <strong>{item.outputs}</strong>
                   </div>
-                  <Link href="/contact">Request a scope <ArrowUpRight size={15} /></Link>
+                  <Link href={advisorLink("Marketing & growth", item.title)}>Request a scope <ArrowUpRight size={15} /></Link>
                 </article>
               );
             })}
@@ -455,7 +456,7 @@ export default function MarketingGrowthPage() {
             <h2>Let&apos;s make growth<br /><span>part of the plan.</span></h2>
             <p>Tell us what you&apos;re building, what you&apos;ve tried and where you&apos;d like to go next.</p>
           </div>
-          <Link className="button button-orange" href="/contact">
+          <Link className="button button-orange" href={advisorLink("Marketing & growth")}>
             Start a conversation <ArrowUpRight size={17} />
           </Link>
         </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { advisorLink } from "@/components/advisor-link";
 
 const links = [
   { href: "/services", label: "What we do" },
@@ -55,7 +56,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Link className="button button-dark nav-cta" href="/contact">
+        <Link className="button button-dark nav-cta" href={advisorLink("Start a project")}>
           Work with us <ArrowUpRight size={16} />
         </Link>
 
@@ -90,7 +91,7 @@ export function SiteHeader() {
           ))}
           <Link
             className="button button-orange"
-            href="/contact"
+            href={advisorLink("Start a project")}
             onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
           >

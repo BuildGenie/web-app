@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
+import { advisorLink } from "@/components/advisor-link";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -95,7 +96,7 @@ export default function Home() {
               that move forward — with the right strategy, growth and technology.
             </p>
             <div className="hero-actions">
-              <Link href="/contact" className="button button-orange">
+              <Link href={advisorLink("Start a project")} className="button button-orange">
                 Build with us <ArrowUpRight size={17} />
               </Link>
               <Link href="#what-we-do" className="text-link">
@@ -353,7 +354,7 @@ export default function Home() {
           </div>
           <div className="footer-links">
             <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="#approach">Our approach</Link><Link href="#ventures">Ventures</Link></div>
-            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href="/contact">Start a project</Link></div>
+            <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href={advisorLink("Start a project")}>Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
         </div>

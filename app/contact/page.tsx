@@ -16,11 +16,14 @@ function BrandMark() {
   );
 }
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string | string[]; selection?: string | string[] }> }) {
+  const params = await searchParams;
+  const service = typeof params.service === "string" ? params.service.trim().slice(0, 100) : "";
+  const selection = typeof params.selection === "string" ? params.selection.trim().slice(0, 100) : "";
   return (
     <main>
       <SiteHeader />
-      <ProjectAdvisor />
+      <ProjectAdvisor key={`${service}:${selection}`} initialService={service} initialSelection={service ? selection : ""} />
       <footer className="site-footer">
         <div className="container footer-main">
           <div className="footer-brand-block">

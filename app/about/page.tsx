@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Compass, Layers3, Lightbulb, Target, Workflow } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { advisorLink } from "@/components/advisor-link";
 
 export const metadata = {
   title: "About | BuildGenie Labs",
@@ -32,7 +33,7 @@ export default function AboutPage() {
             <Eyebrow>ABOUT BUILDGENIE LABS</Eyebrow>
             <h1>Built for founders.<br /><span>Committed to the work.</span></h1>
             <p>BuildGenie Labs is a building partner for ambitious businesses. We bring together strategy, marketing, technology and execution to help founders move from a promising idea to meaningful progress.</p>
-            <Link className="button button-orange" href="/contact">Work with us <ArrowUpRight size={17} /></Link>
+            <Link className="button button-orange" href={advisorLink("Start a project")}>Work with us <ArrowUpRight size={17} /></Link>
           </div>
           <div className="about-hero-art" aria-label="BuildGenie Labs connected capabilities">
             <div className="about-art-ring about-ring-one" /><div className="about-art-ring about-ring-two" />

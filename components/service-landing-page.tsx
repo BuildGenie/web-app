@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { advisorLink } from "@/components/advisor-link";
 
 export type ServiceOffer = {
   name: string;
@@ -52,7 +53,7 @@ function Footer() {
         </div>
         <div className="footer-links">
           <div><span>EXPLORE</span><Link href="/services">All services</Link><Link href="/about">About BuildGenie</Link></div>
-          <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href="/contact">Start a project</Link></div>
+          <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href={advisorLink("Start a project")}>Start a project</Link></div>
         </div>
         <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
       </div>
@@ -75,7 +76,7 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
           <p>{config.intro}</p>
           <div className="service-detail-hero-bottom">
             <span><i /> BUILT AROUND YOUR OUTCOME</span>
-            <Link className="button button-orange" href="/contact">Discuss your project <ArrowUpRight size={17} /></Link>
+            <Link className="button button-orange" href={advisorLink(config.eyebrow)}>Discuss your project <ArrowUpRight size={17} /></Link>
           </div>
         </div>
       </section>
@@ -113,7 +114,7 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
                 <p className="service-detail-offer-description">{offer.description}</p>
                 <div className="service-detail-offer-includes">WHAT&apos;S INCLUDED</div>
                 <ul>{offer.deliverables.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}</ul>
-                <Link href="/contact">Request this engagement <ArrowUpRight size={15} /></Link>
+                <Link href={advisorLink(config.eyebrow, offer.name)}>Request this engagement <ArrowUpRight size={15} /></Link>
               </article>
             ))}
           </div>
@@ -148,7 +149,7 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
       <section className="service-detail-cta section-pad">
         <div className="container service-detail-cta-inner">
           <div><Eyebrow>LET&apos;S GET STARTED</Eyebrow><h2>{config.ctaTitle}<br /><span>{config.ctaHighlight}</span></h2><p>{config.ctaText}</p></div>
-          <Link className="button button-orange" href="/contact">{config.ctaLabel} <ArrowUpRight size={17} /></Link>
+          <Link className="button button-orange" href={advisorLink(config.eyebrow)}>{config.ctaLabel} <ArrowUpRight size={17} /></Link>
         </div>
       </section>
       <Footer />
