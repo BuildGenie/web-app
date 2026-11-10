@@ -22,6 +22,8 @@ const capabilities = [
     icon: Compass,
     name: "Strategy & validation",
     intro: "Make better decisions before committing time and capital.",
+    href: undefined,
+    linkLabel: undefined,
     offerings: [
       ["Idea validation", "Test the problem, audience and appetite before building further."],
       ["Market & customer research", "Understand the landscape, alternatives and people you need to reach."],
@@ -48,6 +50,8 @@ const capabilities = [
     icon: Blocks,
     name: "Technology & products",
     intro: "Use technology to solve real problems and create better experiences.",
+    href: undefined,
+    linkLabel: undefined,
     offerings: [
       ["Product design & development", "Shape and deliver digital products from first release to scale."],
       ["Web & mobile engineering", "Build reliable web and mobile experiences for your customers."],
