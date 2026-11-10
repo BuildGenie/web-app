@@ -690,14 +690,14 @@ export function ProjectAdvisor() {
       <div className="container advisor-layout">
         <div className="advisor-intro">
           <div className="eyebrow"><span className="eyebrow-line" />A BETTER WAY TO START</div>
-          <h1>Let's work out<br /><span>what comes next.</span></h1>
+          <h1>Let&apos;s work out<br /><span>what comes next.</span></h1>
           <p className="advisor-intro-copy">
-            You don't need a perfect brief or even a clear idea of what you need.
+            You don&apos;t need a perfect brief or even a clear idea of what you need.
             Think aloud, explore possibilities and get a practical direction
             grounded in what BuildGenie actually does.
           </p>
           <div className="advisor-promise-list">
-            <div><span><Lightbulb size={18} /></span><p><strong>Space to think</strong>Bring an early idea, a business problem or a question you're still figuring out.</p></div>
+            <div><span><Lightbulb size={18} /></span><p><strong>Space to think</strong>Bring an early idea, a business problem or a question you&apos;re still figuring out.</p></div>
             <div><span><Compass size={18} /></span><p><strong>Useful direction</strong>Get practical next steps and relevant options, even if you decide to do the work yourself.</p></div>
             <div><span><ShieldCheck size={18} /></span><p><strong>Clear and transparent</strong>Recommendations use our published services and guide prices. No pressure to buy.</p></div>
           </div>
@@ -749,7 +749,7 @@ export function ProjectAdvisor() {
             {requestPrepared && (
               <div className="advisor-request-status" role="status">
                 <CheckCircle2 size={17} />
-                <span><strong>Your request is ready.</strong> Your email app should open with the conversation attached. Review it and send to complete the handoff. If it doesn't open, email <a href="mailto:hello@buildgenielabs.com">hello@buildgenielabs.com</a>.</span>
+                <span><strong>Your request is ready.</strong> Your email app should open with the conversation attached. Review it and send to complete the handoff. If it doesn&apos;t open, email <a href="mailto:hello@buildgenielabs.com">hello@buildgenielabs.com</a>.</span>
               </div>
             )}
           </div>
@@ -770,7 +770,7 @@ export function ProjectAdvisor() {
             </div>
           </form>
           <div className="advisor-conversion-row">
-            <div><strong>Ready to take this further?</strong><small>We'll include the conversation and recommendation in your request.</small></div>
+            <div><strong>Ready to take this further?</strong><small>We&apos;ll include the conversation and recommendation in your request.</small></div>
             <button className="button button-orange" type="button" onClick={() => setShowLeadForm(true)}>Work with us <ArrowUpRight size={17} /></button>
           </div>
           <div className="advisor-workspace-footer">
@@ -781,7 +781,7 @@ export function ProjectAdvisor() {
       </div>
 
       <div className="container advisor-bottom-strip">
-        <div><span><MessageCircle size={18} /></span><p><strong>Not ready to work with us?</strong> That's fine. Use the session to clarify your thinking and take the recommendations with you.</p></div>
+        <div><span><MessageCircle size={18} /></span><p><strong>Not ready to work with us?</strong> That&apos;s fine. Use the session to clarify your thinking and take the recommendations with you.</p></div>
         <a href="/services">Explore the full service catalogue <ArrowUpRight size={15} /></a>
       </div>
 
@@ -790,9 +790,9 @@ export function ProjectAdvisor() {
           <div className="advisor-lead-modal" role="dialog" aria-modal="true" aria-labelledby="advisor-lead-title">
             <button type="button" className="advisor-modal-close" onClick={() => setShowLeadForm(false)} aria-label="Close"><X size={19} /></button>
             <div className="advisor-modal-icon"><Mail size={20} /></div>
-            <div className="eyebrow"><span className="eyebrow-line" />LET'S TAKE THE NEXT STEP</div>
+            <div className="eyebrow"><span className="eyebrow-line" />LET&apos;S TAKE THE NEXT STEP</div>
             <h2 id="advisor-lead-title">Work with us.</h2>
-            <p>Your conversation and the initial recommendation will be included, so you won't have to explain everything again.</p>
+            <p>Your conversation and the initial recommendation will be included, so you won&apos;t have to explain everything again.</p>
             <form onSubmit={submitRequest}>
               <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
               <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
