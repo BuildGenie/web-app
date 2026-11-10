@@ -56,7 +56,7 @@ export function SiteHeader() {
         </nav>
 
         <Link className="button button-dark nav-cta" href="/contact">
-          Let&apos;s talk <ArrowUpRight size={16} />
+          Work with us <ArrowUpRight size={16} />
         </Link>
 
         <button
@@ -94,7 +94,7 @@ export function SiteHeader() {
             onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
           >
-            Start a conversation <ArrowUpRight size={17} />
+            Work with us <ArrowUpRight size={17} />
           </Link>
         </nav>
       </div>
