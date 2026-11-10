@@ -172,8 +172,8 @@ function Footer() {
           </div>
           <div>
             <span>CONNECT</span>
-            <Link href="mailto:hello@buildgenielabs.com">Email us</Link>
-            <Link href="/#contact">Start a project</Link>
+            <Link href="/contact">Email us</Link>
+            <Link href="/contact">Start a project</Link>
           </div>
         </div>
         <div className="footer-note">
@@ -205,7 +205,7 @@ export default function MarketingGrowthPage() {
               hands-on execution.
             </p>
             <div className="marketing-hero-actions">
-              <Link className="button button-orange" href="/#contact">
+              <Link className="button button-orange" href="/contact">
                 Talk about growth <ArrowUpRight size={17} />
               </Link>
               <Link className="text-link" href="#subscriptions">
@@ -283,7 +283,7 @@ export default function MarketingGrowthPage() {
                       <li key={deliverable}><Check size={15} />{deliverable}</li>
                     ))}
                   </ul>
-                  <Link href="/#contact" className="inline-link">
+                  <Link href="/contact" className="inline-link">
                     Scope this engagement <ArrowUpRight size={16} />
                   </Link>
                 </article>
@@ -326,7 +326,7 @@ export default function MarketingGrowthPage() {
                 </ul>
                 <div className="subscription-footer">
                   <span>Scope and monthly fee agreed before kickoff</span>
-                  <Link href="/#contact" aria-label={`Discuss the ${plan.name} plan`}>
+                  <Link href="/contact" aria-label={`Discuss the ${plan.name} plan`}>
                     Discuss {plan.name} <ArrowUpRight size={16} />
                   </Link>
                 </div>
@@ -369,7 +369,7 @@ export default function MarketingGrowthPage() {
                     <span>EXAMPLE OUTPUTS</span>
                     <strong>{item.outputs}</strong>
                   </div>
-                  <Link href="/#contact">Request a scope <ArrowUpRight size={15} /></Link>
+                  <Link href="/contact">Request a scope <ArrowUpRight size={15} /></Link>
                 </article>
               );
             })}
@@ -421,7 +421,7 @@ export default function MarketingGrowthPage() {
             <h2>Let's make growth<br /><span>part of the plan.</span></h2>
             <p>Tell us what you're building, what you've tried and where you'd like to go next.</p>
           </div>
-          <Link className="button button-orange" href="/#contact">
+          <Link className="button button-orange" href="/contact">
             Start a conversation <ArrowUpRight size={17} />
           </Link>
         </div>
