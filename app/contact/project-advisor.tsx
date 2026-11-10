@@ -15,7 +15,6 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
-  WandSparkles,
   X,
   Code2,
   Headset,
@@ -810,7 +809,7 @@ function RecommendationCard({ recommendation }: { recommendation: Recommendation
   return (
     <div className="advisor-recommendation">
       <div className="advisor-recommendation-heading">
-        <span><WandSparkles size={15} /> YOUR STARTING DIRECTION</span>
+        <span><Sparkles size={15} /> YOUR STARTING DIRECTION</span>
         <b>BASED ON YOUR CONTEXT</b>
       </div>
       <h3>{recommendation.title}</h3>
