@@ -615,3 +615,7 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
   .contact-form-grid { grid-template-columns: 1fr; }
   .contact-form-bottom { flex-direction: column; align-items: flex-start; }
 }
+
+
+.about-venture-static { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.about-venture-static > span { display: grid; gap: 5px; }
