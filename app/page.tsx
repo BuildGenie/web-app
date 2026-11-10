@@ -309,9 +309,14 @@ export default function Home() {
                 <div><i>03</i><strong>Website design & development</strong></div>
                 <div><i>04</i><strong>E-commerce platform development</strong></div>
               </div>
-              <a href="https://prokemfoods.co.uk/" target="_blank" rel="noreferrer">
-                Visit Prokem <ArrowUpRight size={16} />
-              </a>
+              <div className="client-project-actions">
+                <Link href="/work/prokem">
+                  Read the case study <ArrowUpRight size={16} />
+                </Link>
+                <a href="https://prokemfoods.co.uk/" target="_blank" rel="noreferrer">
+                  Visit Prokem <ArrowUpRight size={16} />
+                </a>
+              </div>
             </div>
           </article>
         </div>
