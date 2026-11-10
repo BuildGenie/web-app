@@ -4,6 +4,13 @@ import { ServiceLandingPage, type ServicePageConfig } from "@/components/service
 export const metadata = {
   title: "Technology & Product Development | BuildGenie Labs",
   description: "Build digital products, web and mobile applications, AI-enabled workflows and reliable technology foundations with BuildGenie Labs.",
+  alternates: { canonical: "/services/technology" },
+  openGraph: {
+    type: "website",
+    title: "Technology & Product Development | BuildGenie Labs",
+    description: "Build digital products, web and mobile applications, AI-enabled workflows and reliable technology foundations.",
+    url: "/services/technology",
+  },
 };
 
 const config: ServicePageConfig = {
