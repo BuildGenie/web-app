@@ -6,6 +6,12 @@ export const metadata = {
   title: "Privacy | BuildGenie Labs",
   description: "How BuildGenie Labs handles information when you browse the website or use the Project Advisor.",
   alternates: { canonical: "/privacy" },
+  openGraph: {
+    type: "website",
+    title: "Privacy | BuildGenie Labs",
+    description: "How BuildGenie Labs handles information when you browse the website or use the Project Advisor.",
+    url: "/privacy",
+  },
 };
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
