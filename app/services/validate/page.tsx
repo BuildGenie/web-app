@@ -4,6 +4,13 @@ import { ServiceLandingPage, type ServicePageConfig } from "@/components/service
 export const metadata = {
   title: "Idea Validation | BuildGenie Labs",
   description: "Test your problem, audience and proposition with a focused validation sprint from BuildGenie Labs.",
+  alternates: { canonical: "/services/validate" },
+  openGraph: {
+    type: "website",
+    title: "Idea Validation | BuildGenie Labs",
+    description: "Test your problem, audience and proposition with a focused validation sprint from BuildGenie Labs.",
+    url: "/services/validate",
+  },
 };
 
 const config: ServicePageConfig = {
