@@ -350,7 +350,14 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
     practicalTitle = "A useful strategy exercise";
     practicalSteps = ["Complete this sentence: We help [specific audience] solve [specific problem] by [distinctive value].", "List the alternatives customers use today, including doing nothing.", "Choose one customer segment and one measurable outcome to prioritise for the next 90 days."];
   } else if (goal === "growth") {
-    if (stage === "idea" || stage === "building") {
+    if (/social|instagram|facebook|content calendar/.test(note)) {
+      offers = [catalogue.socialLite, catalogue.contentCalendar, catalogue.socialOne];
+      title = "Build a social presence you can sustain.";
+      intro = "Choose the right level of support for the content and capacity you already have. A publishing-only arrangement is different from full channel management.";
+      why = "Social Media Lite is available when you supply the content; full management includes content coordination and community activity.";
+      practicalTitle = "A useful social media exercise";
+      practicalSteps = ["Choose one audience and one purpose for the channel.", "Review recent posts and identify which ones prompted meaningful replies, enquiries or visits.", "Build the next two weeks around useful, repeatable themes rather than posting for volume."];
+    } else if (stage === "idea" || stage === "building") {
       offers = [catalogue.validate, catalogue.growthStrategy];
       title = "Build the growth foundation before increasing spend.";
       intro = "Before committing to a recurring acquisition programme, make sure the audience, problem and proposition are clear enough to test.";
@@ -425,7 +432,9 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
   }
 
   if (note.includes("paid ads") || note.includes("advert") || note.includes("facebook ads") || note.includes("google ads")) {
-    offers = [catalogue.paidSetup, catalogue.paidOne];
+    offers = /two platforms|two channels|multiple platforms/.test(note)
+      ? [catalogue.paidSetup, catalogue.paidTwo]
+      : [catalogue.paidSetup, catalogue.paidOne];
     title = "Make paid acquisition measurable before scaling it.";
     intro = "Paid campaigns work best when the audience, offer and conversion event are clear. Set up measurement before increasing the budget.";
     why = "The published setup and management rates cover BuildGenie's service fees; advertising spend is separate.";
@@ -496,10 +505,10 @@ export function ProjectAdvisor() {
   }, [messages]);
 
   const progress = useMemo(() => {
-    if (!context.goal) return 1;
-    if (!context.stage) return 2;
-    if (!context.need) return 3;
-    return 4;
+    if (!context.goal) return 0;
+    if (!context.stage) return 1;
+    if (!context.need) return 2;
+    return 3;
   }, [context]);
 
   function chooseGoal(value: string, label: string) {
@@ -707,8 +716,8 @@ export function ProjectAdvisor() {
               <span><strong>Project Advisor</strong><small>YOUR THINKING PARTNER AT BUILDGENIE</small></span>
             </div>
             <div className="advisor-progress">
-              <span>{progress === 4 ? "DIRECTION READY" : `DISCOVERY 0${progress} / 03`}</span>
-              <div><i style={{ width: `${Math.min(progress, 3) / 3 * 100}%` }} /></div>
+              <span>{progress === 3 ? "DIRECTION READY" : `DISCOVERY 0${progress} / 03`}</span>
+              <div><i style={{ width: `${progress / 3 * 100}%` }} /></div>
             </div>
           </div>
 
