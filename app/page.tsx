@@ -83,6 +83,18 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
+export const metadata = {
+  title: "BuildGenie Labs | Strategy, Growth, Technology & Execution",
+  description: "A hands-on building partner for ambitious founders. BuildGenie connects business strategy, marketing, technology and execution.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    title: "BuildGenie Labs | Strategy, Growth, Technology & Execution",
+    description: "A hands-on building partner for ambitious founders. BuildGenie connects business strategy, marketing, technology and execution.",
+    url: "/",
+  },
+};
+
 export default function Home() {
   return (
     <main>
