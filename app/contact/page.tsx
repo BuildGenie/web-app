@@ -7,6 +7,13 @@ export const metadata = {
   title: "Project Advisor | BuildGenie Labs",
   description:
     "Think through your next business move with BuildGenie. Explore practical recommendations, relevant services and transparent guide pricing before deciding what to do next.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "website",
+    title: "Project Advisor | BuildGenie Labs",
+    description: "Think through your next business move with BuildGenie. Explore practical recommendations, real services and transparent guide pricing.",
+    url: "/contact",
+  },
 };
 
 function BrandMark() {
