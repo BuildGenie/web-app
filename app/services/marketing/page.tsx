@@ -419,7 +419,7 @@ export default function MarketingGrowthPage() {
           <div>
             <Eyebrow>READY TO MOVE FORWARD?</Eyebrow>
             <h2>Let&apos;s make growth<br /><span>part of the plan.</span></h2>
-            <p>Tell us what you&apos;re building, what you&apos;ve tried and where you'd like to go next.</p>
+            <p>Tell us what you&apos;re building, what you&apos;ve tried and where you&apos;d like to go next.</p>
           </div>
           <Link className="button button-orange" href="/contact">
             Start a conversation <ArrowUpRight size={17} />
