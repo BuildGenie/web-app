@@ -1,4 +1,4 @@
-import { Headset, MessageCircle, ClipboardList, ShieldCheck } from "lucide-react";
+import { MessageCircle, ClipboardList, ShieldCheck, Workflow } from "lucide-react";
 import { ServiceLandingPage, type ServicePageConfig } from "@/components/service-landing-page";
 
 export const metadata = {
