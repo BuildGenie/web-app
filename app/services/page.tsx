@@ -5,10 +5,7 @@ import {
   ChartNoAxesCombined,
   Check,
   Compass,
-  Headset,
   Lightbulb,
-  Palette,
-  Search,
   Workflow,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
