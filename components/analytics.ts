@@ -1,9 +1,12 @@
+import { GOOGLE_ANALYTICS_MEASUREMENT_ID } from "@/components/analytics-config";
+
 export type AnalyticsEventParams = Record<string, string | number | boolean | null | undefined>;
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __buildgenieGtmLoaded?: boolean;
   }
 }
 
@@ -25,7 +28,12 @@ export function trackEvent(
         window.dataLayer?.push(args);
       });
 
-    window.gtag("event", eventName, parameters);
+    // The event name is intentionally generic: GTM can route it to GA4
+    // without receiving advisor message contents or personal contact details.
+    window.gtag("event", eventName, {
+      ...parameters,
+      send_to: GOOGLE_ANALYTICS_MEASUREMENT_ID,
+    });
   } catch {
     // Tracking must never interrupt the advisor or the visitor's experience.
   }
