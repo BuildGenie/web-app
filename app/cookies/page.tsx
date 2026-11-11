@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { PreferencesButton } from "./preferences-button";
+import { ANALYTICS_CONFIGURED } from "@/components/analytics-config";
 
 export const metadata = {
   title: "Cookies & Analytics | BuildGenie Labs",
@@ -20,7 +21,7 @@ function Eyebrow() {
 }
 
 export default function CookiesPage() {
-  const analyticsConfigured = Boolean(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID);
+  const analyticsConfigured = ANALYTICS_CONFIGURED;
 
   return (
     <main>
@@ -47,8 +48,8 @@ export default function CookiesPage() {
           <h2>Optional analytics</h2>
           <p>
             {analyticsConfigured
-              ? "Google Analytics is configured but will only load after you choose “Allow analytics”. You can reject it and still use the entire website."
-              : "Google Analytics is not currently configured for this deployment. No optional analytics script is loaded."}
+              ? "Google Tag Manager and the configured Google Analytics 4 destination are ready, but the tag manager only loads after you choose “Allow analytics”. You can reject it and still use the entire website."
+              : "Google Analytics is not configured for this deployment. No optional analytics script is loaded."}
           </p>
           <p>
             If analytics is enabled, it helps us understand which pages and
