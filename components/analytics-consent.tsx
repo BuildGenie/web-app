@@ -55,6 +55,11 @@ function loadGoogleTagManager() {
       ad_personalization: "denied",
     });
     window.gtag("js", new Date());
+    // Route site events to the supplied GA4 stream without an automatic
+    // page_view; the app sends its own page views for client-side navigation.
+    window.gtag("config", GOOGLE_ANALYTICS_MEASUREMENT_ID, {
+      send_page_view: false,
+    });
     window.__buildgenieGtmLoaded = true;
 
     const script = document.createElement("script");
