@@ -21,10 +21,11 @@ Open http://localhost:3000.
 
 ## Environment variables
 
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: optional Google Analytics 4 measurement ID. Analytics remains disabled until a visitor explicitly opts in.
-- `GOOGLE_SITE_VERIFICATION`: optional Google Search Console verification token.
+- `NEXT_PUBLIC_GTM_ID`: Google Tag Manager web container ID (currently defaulted to `GTM-KK8BTHTC`).
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID connected through the GTM container (currently defaulted to `G-17HBY8SV2K`).
+- `GOOGLE_SITE_VERIFICATION`: optional only for Search Console HTML-tag verification. A verified Domain property normally uses DNS verification and does not need this value.
 
-The site can run without either variable. When no GA4 ID is configured, no optional analytics script or consent prompt is shown.
+The supplied GTM and GA4 IDs are configured as public defaults in the source. They can be overridden with deployment environment variables. Google Tag Manager is only loaded after a visitor explicitly accepts optional analytics.
 
 ## Quality checks
 
@@ -59,9 +60,9 @@ before deploying. Node.js 22.12 or later is required by Wrangler.
 
 ## Analytics and conversion tracking
 
-Conversion events are consent-aware. Add a GA4 measurement ID to the deployment environment to activate the opt-in consent panel and analytics. The advisor does not send message contents, names or email addresses to analytics.
+Conversion events are consent-aware and pass through the supplied Google Tag Manager container to the GA4 measurement destination. The visitor must accept optional analytics before the GTM script is loaded. The advisor does not send message contents, names, email addresses or free-text project descriptions to analytics.
 
-Tracked events include advisor goal selection, recommendation generation, work-with-us clicks and prepared email requests.
+Tracked events include page views, advisor goal selection, recommendation generation, work-with-us clicks and prepared email requests. In Google Tag Manager, ensure the Google tag / GA4 destination is configured for the measurement ID `G-17HBY8SV2K`, and that the site's event names are mapped to GA4 event tags as needed.
 
 ## Internal sales resources
 
@@ -71,5 +72,5 @@ Tracked events include advisor goal selection, recommendation generation, work-w
 ## Notes
 
 - Lead requests are not stored by a backend in this version. The visitor sends the prepared email from their own mail application.
-- Search Console ownership verification still requires the site owner's verification token in the deployment environment.
+- After deployment, submit `https://buildgenielabs.com/sitemap.xml` in the verified BuildGenie Labs Domain property in Google Search Console. Domain verification is handled through DNS and does not require a page-level verification meta tag.
 - Replace the CSS-built Prokem project treatment with approved client imagery and brand assets when available.
