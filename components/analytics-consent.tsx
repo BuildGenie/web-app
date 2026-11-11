@@ -60,6 +60,11 @@ function loadGoogleTagManager() {
     window.gtag("config", GOOGLE_ANALYTICS_MEASUREMENT_ID, {
       send_page_view: false,
     });
+    setGoogleConsent(true);
+    window.dataLayer.push({
+      "gtm.start": Date.now(),
+      event: "gtm.js",
+    });
     window.__buildgenieGtmLoaded = true;
 
     const script = document.createElement("script");
@@ -67,6 +72,7 @@ function loadGoogleTagManager() {
     script.src = `https://www.googletagmanager.com/gtm.js?id=${GOOGLE_TAG_MANAGER_ID}`;
     script.dataset.buildgenieTagManager = "true";
     document.head.appendChild(script);
+    return;
   }
 
   setGoogleConsent(true);
