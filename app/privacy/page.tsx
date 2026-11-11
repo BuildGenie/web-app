@@ -54,17 +54,17 @@ export default function PrivacyPage() {
 
           <h2>2. Analytics</h2>
           <p>
-            Optional Google Analytics may be enabled on this website. It loads
-            only when a Google Analytics measurement ID has been configured and
-            you actively allow optional analytics. If no measurement ID is
-            configured, the website does not load Google Analytics.
+            Google Tag Manager and the connected Google Analytics 4 measurement
+            destination are loaded only after you actively allow optional
+            analytics. If you reject optional analytics, the tag manager is not
+            loaded.
           </p>
           <p>
-            When enabled with your permission, analytics can record website
-            visits and selected events such as service interest, advisor
-            interactions and prepared email requests. The contents of your
-            Project Advisor messages, name and email address are not included
-            in analytics events.
+            When enabled with your permission, analytics can record page views and
+            selected events such as advisor goal selection, recommendations
+            and request-email preparation. The contents of Project Advisor
+            messages, names, email addresses and free-text descriptions are not
+            included in analytics events.
           </p>
 
           <h2>3. Browser storage</h2>
