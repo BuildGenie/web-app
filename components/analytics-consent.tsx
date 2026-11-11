@@ -1,19 +1,70 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Script from "next/script";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  GOOGLE_ANALYTICS_MEASUREMENT_ID,
+  GOOGLE_TAG_MANAGER_ID,
+  ANALYTICS_CONFIGURED,
+} from "@/components/analytics-config";
 import { trackEvent } from "@/components/analytics";
 
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 type ConsentChoice = "accepted" | "rejected" | null;
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __buildgenieGtmLoaded?: boolean;
   }
+}
+
+function setGoogleConsent(granted: boolean) {
+  window.dataLayer = window.dataLayer ?? [];
+  window.gtag =
+    window.gtag ??
+    ((...args: unknown[]) => {
+      window.dataLayer?.push(args);
+    });
+
+  window.gtag("consent", "update", {
+    analytics_storage: granted ? "granted" : "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+}
+
+function loadGoogleTagManager() {
+  if (typeof window === "undefined" || !ANALYTICS_CONFIGURED) return;
+
+  window.dataLayer = window.dataLayer ?? [];
+  window.gtag =
+    window.gtag ??
+    ((...args: unknown[]) => {
+      window.dataLayer?.push(args);
+    });
+
+  if (!window.__buildgenieGtmLoaded) {
+    // Basic consent mode: no Google tag is loaded until the visitor opts in.
+    window.gtag("consent", "default", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+    window.gtag("js", new Date());
+    window.__buildgenieGtmLoaded = true;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${GOOGLE_TAG_MANAGER_ID}`;
+    script.dataset.buildgenieTagManager = "true";
+    document.head.appendChild(script);
+  }
+
+  setGoogleConsent(true);
 }
 
 export function AnalyticsConsent() {
@@ -35,7 +86,11 @@ export function AnalyticsConsent() {
   }, []);
 
   useEffect(() => {
-    if (choice === "accepted" && measurementId) {
+    if (choice === "accepted") loadGoogleTagManager();
+  }, [choice]);
+
+  useEffect(() => {
+    if (choice === "accepted") {
       trackEvent("page_view", { page_path: pathname });
     }
   }, [choice, pathname]);
@@ -47,41 +102,26 @@ export function AnalyticsConsent() {
       // A blocked storage API simply means the preference lasts for this visit.
     }
 
+    if (next === "accepted") {
+      loadGoogleTagManager();
+    } else if (window.__buildgenieGtmLoaded) {
+      setGoogleConsent(false);
+    }
+
     setChoice(next);
     setSettingsOpen(false);
 
-    if (next === "rejected" && window.gtag) {
-      window.gtag("consent", "update", { analytics_storage: "denied" });
-    }
-
-    if (next === "accepted" && measurementId) {
+    if (next === "accepted") {
       trackEvent("analytics_consent_granted");
     }
   }
 
-  if (!measurementId) return null;
+  if (!ANALYTICS_CONFIGURED) return null;
 
   const showPanel = choice === null || settingsOpen;
 
   return (
     <>
-      {choice === "accepted" && (
-        <>
-          <Script id="buildgenie-ga-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-              window.gtag('js', new Date());
-              window.gtag('config', '${measurementId}', { send_page_view: false });
-            `}
-          </Script>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-            strategy="afterInteractive"
-          />
-        </>
-      )}
-
       {showPanel && (
         <aside className="analytics-consent" role="dialog" aria-label="Analytics preferences">
           <div className="analytics-consent-copy">
@@ -89,7 +129,7 @@ export function AnalyticsConsent() {
             <p>
               With your permission, we use Google Analytics to understand visits
               and useful actions on this site. The Project Advisor conversation
-              is not sent to analytics.
+              and your contact details are not sent to analytics.
               <Link href="/cookies">Cookie details</Link>
             </p>
           </div>
