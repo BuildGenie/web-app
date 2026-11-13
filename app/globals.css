@@ -1202,7 +1202,7 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 .ventures-index-card-copy h3 { display: flex; align-items: center; justify-content: space-between; margin: 24px 0 10px; font: 800 25px var(--font-manrope); }
 .ventures-index-card-copy h3 svg { color: var(--orange); }
 .ventures-index-card-copy p { min-height: 58px; margin: 0; color: #746c63; font-size: 10px; line-height: 1.8; }
-.ventures-index-cta { display: flex; align-items: center; gap: 9px; margin-top: 22px; padding-top: 17px; border-top: 1px solid #eee7df; color: #bd4f20; font-size: 9px; font-weight: 800; }
+.ventures-index-card-cta { display: flex; align-items: center; gap: 9px; margin-top: 22px; padding-top: 17px; border-top: 1px solid #eee7df; color: #bd4f20; font-size: 9px; font-weight: 800; }
 .ventures-index-note { display: flex; align-items: flex-start; gap: 12px; margin-top: 25px; padding: 18px 20px; background: #fff; border: 1px solid #e8e1d8; }
 .ventures-index-note svg { flex: 0 0 auto; color: var(--orange); }
 .ventures-index-note p { margin: 0; color: #7a7268; font-size: 9px; line-height: 1.7; }
