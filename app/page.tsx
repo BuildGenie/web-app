@@ -12,7 +12,6 @@ import {
   Layers3,
   Lightbulb,
   MoveUpRight,
-  Sparkles,
   Target,
   Workflow,
 } from "lucide-react";
@@ -340,7 +339,6 @@ export default function Home() {
 
       <section className="belief section-pad">
         <div className="container belief-grid">
-          <div className="belief-mark"><Sparkles size={25} /><span>BUILT AROUND<br />YOUR NEXT MOVE</span></div>
           <div>
             <SectionEyebrow>WHY BUILDGENIE</SectionEyebrow>
             <h2>Not another vendor.<br /><span>A partner in the work.</span></h2>
