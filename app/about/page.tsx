@@ -101,8 +101,9 @@ export default function AboutPage() {
             <p>Our own ventures keep us close to the practical realities of building products, earning trust, finding customers and improving an experience over time.</p>
           </div>
           <div className="about-venture-links">
-            <Link href="https://maigie.com" target="_blank" rel="noreferrer"><span><b>Maigie</b><small>An intelligent learning environment.</small></span><ArrowUpRight size={18} /></Link>
-            <div className="about-venture-static"><span><b>Cakkie</b><small>A social platform for cake enthusiasts.</small></span></div>
+            <Link href="/ventures/maigie"><span><b>Maigie</b><small>An intelligent learning environment.</small></span><ArrowUpRight size={18} /></Link>
+            <Link href="/ventures/cakkie"><span><b>Cakkie</b><small>A social platform for cake enthusiasts.</small></span><ArrowUpRight size={18} /></Link>
+            <Link className="about-ventures-all" href="/ventures">Explore all ventures <ArrowUpRight size={15} /></Link>
             <p>BuildGenie-led ventures, not commissioned client case studies.</p>
           </div>
         </div>
@@ -117,7 +118,7 @@ export default function AboutPage() {
 
       <footer className="site-footer">
         <div className="container footer-main">
-          <div className="footer-brand-block"><Link className="brand brand-light" href="/"><BrandMark /><span className="brand-name">buildgenie<span>labs</span></span></Link><p>Build with clarity.<br />Grow with intent.</p></div>
+          <div className="footer-brand-block"><Link className="brand brand-light" href="/"><BrandMark /><span className="brand-name">BuildGenie <span>Labs</span></span></Link><p>Build with clarity.<br />Grow with intent.</p></div>
           <div className="footer-links">
             <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="/services/marketing">Marketing & growth</Link><Link href="/#approach">Our approach</Link></div>
             <div><span>CONNECT</span><Link href="/contact">Contact</Link><Link href="mailto:hello@buildgenielabs.com">Email us</Link></div>
