@@ -238,7 +238,7 @@ export default function MarketingGrowthPage() {
             <h1>Get your product<br />in front of <span>the right people.</span></h1>
             <p>
               We help startups move from scattered marketing activity to a
-              clearer growth system — combining customer insight, strategy and
+              clearer growth system, combining customer insight, strategy and
               hands-on execution.
             </p>
             <div className="marketing-hero-actions">
@@ -344,7 +344,7 @@ export default function MarketingGrowthPage() {
             </div>
             <p>
               Monthly subscriptions give your business a consistent team,
-              operating rhythm and set of deliverables — without having to
+              operating rhythm and set of deliverables, without having to
               assemble a marketing department from scratch.
             </p>
           </div>

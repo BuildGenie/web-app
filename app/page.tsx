@@ -106,7 +106,7 @@ export default function Home() {
             <h1>Good ideas deserve <span>great execution.</span></h1>
             <p className="hero-description">
               We help ambitious founders turn promising ideas into businesses
-              that move forward — with the right strategy, growth and technology.
+              that move forward with the right strategy, growth and technology.
             </p>
             <div className="hero-actions">
               <Link href={advisorLink("Start a project")} className="button button-orange">
@@ -216,7 +216,7 @@ export default function Home() {
             <h2>Make growth<br /><span>less of a guessing game.</span></h2>
             <p>
               Great products still need to find their people. We help startups
-              build a consistent path to discovery, adoption and retention —
+              build a consistent path to discovery, adoption and retention,
               combining clear strategy with hands-on marketing execution.
             </p>
             <ul className="check-list">
@@ -281,7 +281,7 @@ export default function Home() {
               <Link className="venture-explore-link" href="/ventures/cakkie">Explore Cakkie <ArrowUpRight size={15} /></Link>
             </article>
           </div>
-          <div className="venture-index-actions"><p className="venture-disclaimer">These are BuildGenie-led ventures, included to show our builder mindset — not presented as commissioned client work.</p><Link className="inline-link" href="/ventures">Explore all ventures <ArrowUpRight size={16} /></Link></div>
+          <div className="venture-index-actions"><p className="venture-disclaimer">These are BuildGenie-led ventures, included to show our builder mindset, not presented as commissioned client work.</p><Link className="inline-link" href="/ventures">Explore all ventures <ArrowUpRight size={16} /></Link></div>
         </div>
       </section>
 

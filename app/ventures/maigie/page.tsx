@@ -18,7 +18,7 @@ const venture: VentureDetail = {
   category: "LEARNING TECHNOLOGY",
   name: "Maigie",
   headline: "Learning should happen, not be managed.",
-  summary: "Maigie is an intelligent learning environment designed to keep learning moving — carrying context across the questions, preparation, practice and reflection that make understanding stick.",
+  summary: "Maigie is an intelligent learning environment designed to keep learning moving, carrying context across the questions, preparation, practice and reflection that make understanding stick.",
   thesisEyebrow: "THE IDEA BEHIND MAIGIE",
   thesisTitle: "Learning is a continuous experience. The tools around it should understand that.",
   thesis: [

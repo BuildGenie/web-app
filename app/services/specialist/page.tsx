@@ -41,7 +41,7 @@ const services = [
       "Marketing graphics and digital assets",
     ],
     deliverables: "Approved creative files, editable source assets where agreed, and usage-ready exports.",
-    pricing: ["Brand identity starter kit — ₦250,000", "Full brand identity system — ₦350,000–₦500,000"],
+    pricing: ["Brand identity starter kit: ₦250,000", "Full brand identity system: ₦350,000–₦500,000"],
   },
   {
     icon: PenTool,
@@ -55,7 +55,7 @@ const services = [
       "Email, social and product communication",
     ],
     deliverables: "A defined copy set, content document or channel-ready content batch.",
-    pricing: ["10 social graphics — ₦60,000", "Content calendar — ₦50,000", "Website copy (up to 5 pages) — ₦150,000–₦250,000"],
+    pricing: ["10 social graphics: ₦60,000", "Content calendar: ₦50,000", "Website copy (up to 5 pages): ₦150,000–₦250,000"],
   },
   {
     icon: Megaphone,
@@ -69,7 +69,7 @@ const services = [
       "Community monitoring and monthly reporting",
     ],
     deliverables: "Approved calendar, published content within the agreed volume, and channel report.",
-    pricing: ["Social Media Lite — ₦50,000/month (one platform; up to 8 client-supplied items; scheduling/publishing only)", "Full management — ₦120,000/month (one platform) · ₦180,000/month (two platforms)"],
+    pricing: ["Social Media Lite: ₦50,000/month (one platform; up to 8 client-supplied items; scheduling/publishing only)", "Full management: ₦120,000/month (one platform) · ₦180,000/month (two platforms)"],
   },
   {
     icon: BarChart3,
@@ -83,7 +83,7 @@ const services = [
       "Conversion tracking and performance analysis",
     ],
     deliverables: "Campaign setup, experiment log, optimisation actions and performance report.",
-    pricing: ["Paid ads setup — ₦100,000 (one platform)", "Management — ₦150,000/month (one platform) · ₦250,000/month (two platforms)"],
+    pricing: ["Paid ads setup: ₦100,000 (one platform)", "Management: ₦150,000/month (one platform) · ₦250,000/month (two platforms)"],
   },
   {
     icon: Search,
@@ -97,7 +97,7 @@ const services = [
       "Insight synthesis and prioritised recommendations",
     ],
     deliverables: "Research brief, findings summary, supporting evidence and recommended next steps.",
-    pricing: ["Competitor research/audit — ₦100,000", "Customer research sprint — ₦250,000–₦350,000"],
+    pricing: ["Competitor research/audit: ₦100,000", "Customer research sprint: ₦250,000–₦350,000"],
   },
   {
     icon: Headset,
@@ -111,7 +111,7 @@ const services = [
       "Ticket handling and recurring issue reporting",
     ],
     deliverables: "Support playbook, response templates, agreed coverage and issue insights.",
-    pricing: ["Customer support playbook & FAQ setup — ₦150,000", "Ongoing customer support — from ₦180,000/month"],
+    pricing: ["Customer support playbook & FAQ setup: ₦150,000", "Ongoing customer support: from ₦180,000/month"],
   },
   {
     icon: Layers3,
@@ -125,7 +125,7 @@ const services = [
       "Launch monitoring and post-launch review",
     ],
     deliverables: "Launch plan, asset checklist, activity tracker and retrospective.",
-    pricing: ["Launch/campaign operations — ₦250,000–₦450,000"],
+    pricing: ["Launch/campaign operations: ₦250,000–₦450,000"],
   },
   {
     icon: Settings2,
@@ -139,7 +139,7 @@ const services = [
       "Dashboard and reporting setup",
     ],
     deliverables: "Tracking plan, configured reports or dashboard, and measurement notes.",
-    pricing: ["Marketing analytics/tracking setup — ₦120,000–₦200,000"],
+    pricing: ["Marketing analytics/tracking setup: ₦120,000–₦200,000"],
   },
 ];
 

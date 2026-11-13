@@ -736,7 +736,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       : "No structured recommendation selected yet.";
 
     const body = [
-      "BUILDGENIE LABS — PROJECT ADVISOR ENQUIRY",
+      "BUILDGENIE LABS: PROJECT ADVISOR ENQUIRY",
       "",
       `Name: ${leadName}`,
       `Email: ${leadEmail}`,
@@ -751,7 +751,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       "Prepared on the BuildGenie Labs website. This email is not sent until you review and press Send.",
     ].join("\n").slice(0, 12000);
 
-    const subject = `Project enquiry — ${leadName}`;
+    const subject = `Project enquiry: ${leadName}`;
     const mailto = `mailto:hello@buildgenielabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setRequestMailto(mailto);

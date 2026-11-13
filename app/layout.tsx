@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 const siteUrl = "https://buildgenielabs.com";
-const siteTitle = "BuildGenie Labs — Build with clarity. Grow with intent.";
+const siteTitle = "BuildGenie Labs: Build with clarity. Grow with intent.";
 const siteDescription =
   "BuildGenie Labs helps ambitious founders turn promising ideas into enduring businesses through strategy, growth, technology and execution.";
 

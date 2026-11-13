@@ -17,7 +17,7 @@ const config: ServicePageConfig = {
   eyebrow: "TECHNOLOGY & PRODUCTS",
   headline: "Turn good ideas into",
   highlight: "useful digital products.",
-  intro: "We help teams shape, build and improve the technology behind their business — from early product definition and user experience to web and mobile engineering, integrations and applied AI.",
+  intro: "We help teams shape, build and improve the technology behind their business, from early product definition and user experience to web and mobile engineering, integrations and applied AI.",
   note: "Technology projects are scoped individually. Fees depend on product complexity, platform, integrations, delivery milestones and team capacity. We begin with a brief and, where needed, a paid discovery phase before proposing a build budget. Third-party licences, cloud infrastructure and external services are separate.",
   featuresHeading: "From product thinking to reliable delivery.",
   featuresIntro: "We bring product judgement and engineering execution together so the solution is grounded in user needs, commercially useful and maintainable beyond the first release.",
