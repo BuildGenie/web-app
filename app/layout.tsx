@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { AnalyticsConsent } from "@/components/analytics-consent";
+import { MotionEffects } from "@/components/motion-effects";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -85,6 +86,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable} ${inter.variable}`}>
         {children}
+        <MotionEffects />
         <AnalyticsConsent />
         <script
           type="application/ld+json"
