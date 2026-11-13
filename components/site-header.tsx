@@ -7,8 +7,8 @@ import { advisorLink } from "@/components/advisor-link";
 
 const links = [
   { href: "/services", label: "What we do" },
-  { href: "/#approach", label: "Our approach" },
-  { href: "/#ventures", label: "Ventures" },
+  { href: "/work", label: "Client work" },
+  { href: "/ventures", label: "Ventures" },
   { href: "/about", label: "About" },
 ];
 
@@ -44,7 +44,7 @@ export function SiteHeader() {
             <span />
           </span>
           <span className="brand-name">
-            buildgenie<span>labs</span>
+            BuildGenie <span>Labs</span>
           </span>
         </Link>
 
