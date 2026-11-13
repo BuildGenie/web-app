@@ -374,7 +374,7 @@ export default function Home() {
             <p>Build with clarity.<br />Grow with intent.</p>
           </div>
           <div className="footer-links">
-            <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="#approach">Our approach</Link><Link href="#ventures">Ventures</Link></div>
+            <div><span>EXPLORE</span><Link href="/services">Services</Link><Link href="/work">Client work</Link><Link href="#approach">Our approach</Link><Link href="/ventures">Ventures</Link></div>
             <div><span>CONNECT</span><Link href="/contact">Email us</Link><Link href={advisorLink("Start a project")}>Start a project</Link></div>
           </div>
           <div className="footer-note"><span>AN INDEPENDENT BUILDING PARTNER</span><p>For founders with somewhere<br />meaningful to go.</p></div>
