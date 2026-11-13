@@ -1339,3 +1339,130 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
   .venture-detail-builder-inner .button { grid-column: auto; }
   .venture-detail-builder h2 { font-size: 22px; }
 }
+
+
+/* BuildGenie motion system: restrained movement, progressive enhancement */
+@keyframes bg-orbit-spin {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+@keyframes bg-orbit-spin-reverse {
+  from { rotate: 360deg; }
+  to { rotate: 0deg; }
+}
+@keyframes bg-cake-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes bg-core-breathe {
+  0%, 100% { box-shadow: 0 20px 60px rgba(0,0,0,.18); }
+  50% { box-shadow: 0 24px 70px rgba(242,106,46,.18); }
+}
+
+.hero-art .art-orbit { animation: bg-orbit-spin 54s linear infinite; }
+.hero-art .orbit-two { animation-direction: reverse; animation-duration: 68s; }
+.hero-art .orbit-three { animation-duration: 42s; }
+.hero-art .art-core { animation: bg-core-breathe 8s ease-in-out infinite; }
+
+.maigie-art .maigie-orb,
+.maigie-index-orbit,
+.maigie-detail-orbit { animation: bg-orbit-spin 58s linear infinite; }
+.maigie-art .orb-b,
+.maigie-index-orbit.two,
+.maigie-detail-orbit.orbit-two { animation: bg-orbit-spin-reverse 72s linear infinite; }
+.maigie-art .orb-c,
+.maigie-index-orbit.three,
+.maigie-detail-orbit.orbit-three { animation-duration: 88s; }
+
+.cake-shape,
+.cakkie-index-cake,
+.cakkie-detail-cake { animation: bg-cake-float 6.5s ease-in-out infinite; transform-origin: center; }
+.cakkie-index-cake { animation-delay: -.8s; }
+.cakkie-detail-cake { animation-delay: -1.4s; }
+
+/* Reveal only after the observer is available, so content stays visible without JS. */
+[data-motion="reveal"] {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity .72s cubic-bezier(.2,.7,.2,1),
+    transform .72s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--motion-delay, 0ms);
+}
+[data-motion="reveal"].is-motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+[data-motion="reveal"].is-motion-visible:hover {
+  transition-delay: 0ms;
+}
+
+/* Small, consistent interactions across navigation, links and cards. */
+.desktop-nav a,
+.footer-links a,
+.about-venture-links a,
+.venture-explore-link,
+.card-link,
+.inline-link,
+.client-project-actions a,
+.work-featured-actions a {
+  transition: color .2s ease, opacity .2s ease, transform .2s ease;
+}
+.inline-link svg,
+.card-link svg,
+.venture-explore-link svg,
+.client-project-actions svg,
+.work-featured-actions svg {
+  transition: transform .2s ease;
+}
+.inline-link:hover svg,
+.card-link:hover svg,
+.venture-explore-link:hover svg,
+.client-project-actions a:hover svg,
+.work-featured-actions a:hover svg {
+  transform: translate(2px, -2px);
+}
+.venture-card,
+.ventures-index-card,
+.about-principle-card,
+.case-study-deliverable,
+.venture-detail-focus-grid article {
+  transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease, border-color .28s ease;
+}
+.venture-card:hover,
+.about-principle-card:hover,
+.case-study-deliverable:hover,
+.venture-detail-focus-grid article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 36px rgba(32,24,17,.07);
+  border-color: #e0d6ca;
+}
+.button {
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease, background .22s ease, color .22s ease;
+}
+.button:hover {
+  box-shadow: 0 9px 24px rgba(23,23,23,.12);
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(242,106,46,.55);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="reveal"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-art .art-orbit,
+  .hero-art .art-core,
+  .maigie-art .maigie-orb,
+  .maigie-index-orbit,
+  .maigie-detail-orbit,
+  .cake-shape,
+  .cakkie-index-cake,
+  .cakkie-detail-cake {
+    animation: none !important;
+  }
+}
