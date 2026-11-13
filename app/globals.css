@@ -203,7 +203,7 @@ h2 { font: 750 clamp(36px, 4vw, 52px)/1.14 var(--font-manrope), sans-serif; lett
 .footer-main { display: flex; justify-content: space-between; padding-bottom: 65px; }
 .brand-light .brand-mark span:nth-child(4) { background: white; }
 .brand-light .brand-name { color: white; }
-.footer-brand-block > p { margin: 20px 0 0 39px; color: #9b9690; font-size: 12px; line-height: 1.8; }
+.footer-brand-block > p { margin: 20px 0 0; color: #9b9690; font-size: 12px; line-height: 1.8; }
 .footer-links { display: flex; gap: 100px; }
 .footer-links > div { display: grid; gap: 14px; align-content: start; }
 .footer-links span, .footer-note > span { color: #77716b; font-size: 8px; letter-spacing: 1.8px; margin-bottom: 7px; }
