@@ -6,6 +6,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/about",
+    "/work",
+    "/work/prokem",
+    "/ventures",
+    "/ventures/maigie",
+    "/ventures/cakkie",
     "/services",
     "/services/validate",
     "/services/strategy",
@@ -14,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/technology",
     "/services/support",
     "/contact",
-    "/work/prokem",
     "/privacy",
     "/cookies",
   ];
