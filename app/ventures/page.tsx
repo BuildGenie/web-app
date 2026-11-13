@@ -48,7 +48,7 @@ export default function VenturesPage() {
                 <div className="ventures-index-card-meta"><span>01 / LEARNING TECHNOLOGY</span><span>PRODUCT VENTURE</span></div>
                 <h3>Maigie <ArrowUpRight size={20} /></h3>
                 <p>An intelligent learning environment that carries context across learning, questions, preparation, practice and reflection.</p>
-                <span className="ventures-index-cta">Explore Maigie <ArrowUpRight size={15} /></span>
+                <span className="ventures-index-card-cta">Explore Maigie <ArrowUpRight size={15} /></span>
               </div>
             </Link>
             <Link href="/ventures/cakkie" className="ventures-index-card">
@@ -60,7 +60,7 @@ export default function VenturesPage() {
                 <div className="ventures-index-card-meta"><span>02 / FOOD & COMMUNITY</span><span>PRODUCT VENTURE</span></div>
                 <h3>Cakkie <ArrowUpRight size={20} /></h3>
                 <p>A social platform for cake enthusiasts, bringing people who love cakes, create them and share their craft closer together.</p>
-                <span className="ventures-index-cta">Explore Cakkie <ArrowUpRight size={15} /></span>
+                <span className="ventures-index-card-cta">Explore Cakkie <ArrowUpRight size={15} /></span>
               </div>
             </Link>
           </div>
