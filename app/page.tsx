@@ -268,6 +268,7 @@ export default function Home() {
                 <span className="maigie-caption">LEARNING THAT MOVES WITH YOU</span>
               </div>
               <div className="venture-info"><div><h3>Maigie</h3><p>An intelligent learning environment designed to keep learning moving.</p></div><span>PRODUCT VENTURE</span></div>
+              <Link className="venture-explore-link" href="/ventures/maigie">Explore Maigie <ArrowUpRight size={15} /></Link>
             </article>
             <article className="venture-card venture-cakkie">
               <div className="venture-top"><span>02 / FOOD & COMMUNITY</span><span className="venture-arrow"><ArrowUpRight size={19} /></span></div>
@@ -277,9 +278,10 @@ export default function Home() {
                 <span className="cakkie-caption">A LITTLE MORE ICING, A LOT MORE COMMUNITY</span>
               </div>
               <div className="venture-info"><div><h3>Cakkie</h3><p>A social platform bringing cake enthusiasts and creators together.</p></div><span>PRODUCT VENTURE</span></div>
+              <Link className="venture-explore-link" href="/ventures/cakkie">Explore Cakkie <ArrowUpRight size={15} /></Link>
             </article>
           </div>
-          <p className="venture-disclaimer">These are BuildGenie-led ventures, included to show our builder mindset — not presented as commissioned client work.</p>
+          <div className="venture-index-actions"><p className="venture-disclaimer">These are BuildGenie-led ventures, included to show our builder mindset — not presented as commissioned client work.</p><Link className="inline-link" href="/ventures">Explore all ventures <ArrowUpRight size={16} /></Link></div>
         </div>
       </section>
 
@@ -332,6 +334,7 @@ export default function Home() {
               </div>
             </div>
           </article>
+          <div className="client-work-index-link"><Link className="inline-link" href="/work">Explore selected client work <ArrowUpRight size={16} /></Link></div>
         </div>
       </section>
 
@@ -367,7 +370,7 @@ export default function Home() {
       <footer className="site-footer">
         <div className="container footer-main">
           <div className="footer-brand-block">
-            <Link className="brand brand-light" href="/"><BrandMark /><span className="brand-name">buildgenie<span>labs</span></span></Link>
+            <Link className="brand brand-light" href="/"><BrandMark /><span className="brand-name">BuildGenie <span>Labs</span></span></Link>
             <p>Build with clarity.<br />Grow with intent.</p>
           </div>
           <div className="footer-links">
