@@ -48,7 +48,7 @@ function Footer() {
         <div className="footer-brand-block">
           <Link className="brand brand-light" href="/">
             <span className="brand-mark" aria-hidden="true"><span /><span /><span /><span /></span>
-            <span className="brand-name">buildgenie<span>labs</span></span>
+            <span className="brand-name">BuildGenie <span>Labs</span></span>
           </Link>
           <p>Build with clarity.<br />Grow with intent.</p>
         </div>
