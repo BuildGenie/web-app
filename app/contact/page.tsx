@@ -37,7 +37,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           <div className="footer-brand-block">
             <Link className="brand brand-light" href="/">
               <BrandMark />
-              <span className="brand-name">buildgenie<span>labs</span></span>
+              <span className="brand-name">BuildGenie <span>Labs</span></span>
             </Link>
             <p>Build with clarity.<br />Grow with intent.</p>
           </div>
