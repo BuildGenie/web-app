@@ -177,13 +177,13 @@ export default async function SpecialistServicesPage() {
   const dynamicServices = services.map((service) => ({
     ...service,
     pricing: service.pricing.map((line) => {
-      const label = line.split(":")[0].trim().toLowerCase().replace(/\\s*\\/\\s*/g, "/");
-      const match = backendPackages.find((pkg => {
-        const name = pkg.name.trim().toLowerCase().replace(/\\s*\\/\\s*/g, "/");
+      const label = line.split(":")[0].trim().toLowerCase().replace(/\s*\/\s*/g, "/");
+      const match = backendPackages.find((pkg) => {
+        const name = pkg.name.trim().toLowerCase().replace(/\s*\/\s*/g, "/");
         return label.includes(name) || name.includes(label);
-      }));
+      });
       const config = (match?.configuration ?? {}) as Record<string, unknown>;
-      return typeof config.displayPrice === "string" ? `${line.split(":")[0]}: ${config.displayPrice}` : line;
+      return typeof config.displayPrice === "string" ? \`\${line.split(":")[0]}: \${config.displayPrice}\` : line;
     }),
   }));
   return (
