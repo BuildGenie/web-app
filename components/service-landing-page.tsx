@@ -71,7 +71,7 @@ function Footer() {
 export async function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
   const backendServices = await getPublicServices().catch(() => []);
   const backendPackages = backendServices.flatMap((service) => service.packages ?? []);
-  const offers = displayConfig.offers.map((offer) => {
+  const offers = config.offers.map((offer) => {
     const match = backendPackages.find((pkg) => pkg.name.trim().toLowerCase() === offer.name.trim().toLowerCase());
     if (!match) return offer;
     const packageConfig = (match.configuration ?? {}) as Record<string, unknown>;
