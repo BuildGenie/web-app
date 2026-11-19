@@ -557,6 +557,22 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
         "growth": "growth",
         "technology-product-development": "technology",
         "ongoing-support": "ongoingSupport",
+        "brand-starter-kit": "brandStarter",
+        "full-brand-identity-system": "brandSystem",
+        "social-media-lite": "socialLite",
+        "full-social-one-platform": "socialOne",
+        "full-social-two-platforms": "socialTwo",
+        "paid-ads-setup": "paidSetup",
+        "paid-ads-one-platform": "paidOne",
+        "paid-ads-two-platforms": "paidTwo",
+        "website-copy-five-pages": "copy",
+        "ten-social-graphics": "graphics",
+        "content-calendar": "contentCalendar",
+        "competitor-research-audit": "competitorResearch",
+        "customer-research-sprint": "customerResearch",
+        "launch-campaign-operations": "launchOps",
+        "marketing-analytics-tracking": "analytics",
+        "support-playbook-faq": "supportPlaybook",
       };
       const next = { ...catalogue };
       for (const service of services) {
