@@ -543,7 +543,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
   const [leadEmail, setLeadEmail] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [requestedItem, setRequestedItem] = useState("");
-  const [requestMailto, setRequestMailto] = useState("");
+
 
   useEffect(() => {
     let active = true;
@@ -910,7 +910,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <div className="eyebrow"><span className="eyebrow-line" />NEXT STEPS</div>
                 <h2 id="advisor-lead-title">Thank you, {leadName}.</h2>
                 <p>Your enquiry and Advisor conversation have been saved. Our team can review your context and follow up with you.</p>
-                <a className="button button-orange" href={requestMailto || "mailto:hello@buildgenielabs.com"}>Open prepared email <ArrowUpRight size={17} /></a>
+
                 <p className="advisor-handoff-note">Your project context is attached to the enquiry so you won’t need to repeat yourself.</p>
               </div>
             ) : (
