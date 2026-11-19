@@ -16,6 +16,7 @@ import {
 import { SiteHeader } from "@/components/site-header";
 import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
+import { getPublicServices } from "@/lib/public-api";
 
 export const metadata = {
   title: "Marketing & Growth | BuildGenie Labs",
@@ -226,7 +227,29 @@ function Footer() {
   );
 }
 
-export default function MarketingGrowthPage() {
+export default async function MarketingGrowthPage() {
+  const services = await getPublicServices().catch(() => []);
+  const packages = services.flatMap((service) => service.packages ?? []);
+  const packageBySlug = new Map(packages.map((pkg) => [pkg.slug, pkg]));
+  const displayPrice = (slug: string, fallback: string) => {
+    const pkg = packageBySlug.get(slug);
+    const config = (pkg?.configuration ?? {}) as Record<string, unknown>;
+    return typeof config.displayPrice === "string" ? config.displayPrice : fallback;
+  };
+  const displayTimeline = (slug: string, fallback: string) => {
+    const pkg = packageBySlug.get(slug);
+    const config = (pkg?.configuration ?? {}) as Record<string, unknown>;
+    return typeof config.timeline === "string" ? config.timeline : fallback;
+  };
+  const dynamicEngagements = engagements.map((item) => {
+    const slug = item.label === "Validate" ? "validate-sprint" : item.label === "Growth Strategy" ? "growth-strategy-sprint" : "go-to-market-strategy";
+    return { ...item, fee: displayPrice(slug, item.fee), timeline: displayTimeline(slug, item.timeline) };
+  });
+  const dynamicSubscriptions = subscriptions.map((item) => {
+    const slug = item.name.toLowerCase();
+    return { ...item, fee: displayPrice(slug, item.fee) };
+  });
+  const catalogueLive = services.length > 0;
   return (
     <main>
       <SiteHeader />
@@ -303,7 +326,7 @@ export default function MarketingGrowthPage() {
           </div>
 
           <div className="sprint-grid">
-            {engagements.map((item) => {
+            {dynamicEngagements.map((item) => {
               const Icon = item.icon;
               return (
                 <article className="sprint-card" key={item.number}>
