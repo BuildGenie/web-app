@@ -14,6 +14,7 @@ import {
 import { SiteHeader } from "@/components/site-header";
 import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
+import { getPublicServices } from "@/lib/public-api";
 
 export const metadata = {
   title: "Specialist Services | BuildGenie Labs",
@@ -69,7 +70,7 @@ const services = [
       "Community monitoring and monthly reporting",
     ],
     deliverables: "Approved calendar, published content within the agreed volume, and channel report.",
-    pricing: ["Social Media Lite: ₦50,000/month (one platform; up to 8 client-supplied items; scheduling/publishing only)", "Full management: ₦120,000/month (one platform) · ₦180,000/month (two platforms)"],
+    pricing: ["Social Media Lite: ₦50,000/month (one platform; up to 8 client-supplied items; scheduling/publishing only)", "Full social media management · one platform: ₦120,000/month", "Full social media management · two platforms: ₦180,000/month"],
   },
   {
     icon: BarChart3,
@@ -83,7 +84,7 @@ const services = [
       "Conversion tracking and performance analysis",
     ],
     deliverables: "Campaign setup, experiment log, optimisation actions and performance report.",
-    pricing: ["Paid ads setup: ₦100,000 (one platform)", "Management: ₦150,000/month (one platform) · ₦250,000/month (two platforms)"],
+    pricing: ["Paid ads setup: ₦100,000 (one platform)", "Paid ads management · one platform: ₦150,000/month", "Paid ads management · two platforms: ₦250,000/month"],
   },
   {
     icon: Search,
@@ -169,7 +170,22 @@ function BrandMark() {
   return <span className="brand-mark" aria-hidden="true"><span /><span /><span /><span /></span>;
 }
 
-export default function SpecialistServicesPage() {
+export default async function SpecialistServicesPage() {
+  const backendServices = await getPublicServices().catch(() => []);
+  const backendPackages = backendServices.flatMap((service) => service.packages ?? []);
+  const catalogueLive = backendServices.length > 0;
+  const dynamicServices = services.map((service) => ({
+    ...service,
+    pricing: service.pricing.map((line) => {
+      const label = line.split(":")[0].trim().toLowerCase().replace(/\\s*\\/\\s*/g, "/");
+      const match = backendPackages.find((pkg => {
+        const name = pkg.name.trim().toLowerCase().replace(/\\s*\\/\\s*/g, "/");
+        return label.includes(name) || name.includes(label);
+      }));
+      const config = (match?.configuration ?? {}) as Record<string, unknown>;
+      return typeof config.displayPrice === "string" ? `${line.split(":")[0]}: ${config.displayPrice}` : line;
+    }),
+  }));
   return (
     <main>
       <SiteHeader />
@@ -202,7 +218,7 @@ export default function SpecialistServicesPage() {
           </div>
 
           <div className="specialist-catalogue-grid">
-            {services.map((service) => {
+            {dynamicServices.map((service) => {
               const Icon = service.icon;
               return (
                 <article className="specialist-detail-card" key={service.number}>
