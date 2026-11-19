@@ -765,21 +765,21 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       if (message.recommendation) {
         sections.push(
           `Recommendation: ${message.recommendation.title}`,
-          message.recommendation.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`).join("\\n"),
+          message.recommendation.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`).join("\n"),
           `Why: ${message.recommendation.why}`,
-          `Practical next steps:\\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`
+          `Practical next steps:\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`
         );
       }
-      return sections.join("\\n");
-    }).join("\\n\\n");
+      return sections.join("\n");
+    }).join("\n\n");
 
     const currentRecommendation = plan
       ? [
           plan.title,
           ...plan.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`),
           `Why: ${plan.why}`,
-          `Practical next steps:\\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`,
-        ].join("\\n")
+          `Practical next steps:\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`,
+        ].join("\n")
       : "No structured recommendation selected yet.";
 
     const advisorContext = [
@@ -787,7 +787,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       conversation,
       "CURRENT RECOMMENDATION",
       currentRecommendation,
-    ].join("\\n\\n").slice(0, 8000);
+    ].join("\n\n").slice(0, 8000);
 
     try {
       await submitPublicLead({
@@ -918,7 +918,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <div className="advisor-modal-icon"><Mail size={20} /></div>
                 <div className="eyebrow"><span className="eyebrow-line" />LET&apos;S TAKE THE NEXT STEP</div>
                 <h2 id="advisor-lead-title">Work with us.</h2>
-                <p>Add your name and email. We&apos;ll prepare an email with your conversation, selected engagement and any recommendation so you do not have to start over.</p>
+                <p>Add your contact details. We’ll save your enquiry together with the conversation and recommendation for our team to review.</p>
                 <form onSubmit={submitRequest}>
                   <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>\n                  <label>Company or product<input value={leadCompany} onChange={(event) => setLeadCompany(event.target.value)} autoComplete="organization" placeholder="Company name (optional)" /></label>
                   <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
