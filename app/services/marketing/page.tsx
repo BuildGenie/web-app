@@ -325,7 +325,7 @@ export default async function MarketingGrowthPage() {
             </p>
           </div>
 
-          <div className="sprint-grid">
+          <p className="sprint-pricing-note">{catalogueLive ? "Guide pricing is synced from the BuildGenie service catalogue." : "Live pricing is temporarily unavailable; guide prices are shown."}</p>\n          <div className="sprint-grid">
             {dynamicEngagements.map((item) => {
               const Icon = item.icon;
               return (
@@ -373,7 +373,7 @@ export default async function MarketingGrowthPage() {
           </div>
 
           <div className="subscription-grid">
-            {subscriptions.map((plan) => (
+            {dynamicSubscriptions.map((plan) => (
               <article className="subscription-card" key={plan.number}>
                 <div className="subscription-card-top">
                   <span>{plan.number} / MONTHLY SUBSCRIPTION</span>
