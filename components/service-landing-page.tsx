@@ -3,6 +3,7 @@ import { ArrowUpRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { LegalLinks } from "@/components/legal-links";
 import { advisorLink } from "@/components/advisor-link";
+import { getPublicServices } from "@/lib/public-api";
 
 export type ServiceOffer = {
   name: string;
@@ -67,29 +68,43 @@ function Footer() {
   );
 }
 
-export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
+export async function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
+  const backendServices = await getPublicServices().catch(() => []);
+  const backendPackages = backendServices.flatMap((service) => service.packages ?? []);
+  const offers = displayConfig.offers.map((offer) => {
+    const match = backendPackages.find((pkg) => pkg.name.trim().toLowerCase() === offer.name.trim().toLowerCase());
+    if (!match) return offer;
+    const packageConfig = (match.configuration ?? {}) as Record<string, unknown>;
+    return {
+      ...offer,
+      price: typeof packageConfig.displayPrice === "string" ? packageConfig.displayPrice : offer.price,
+      timeline: typeof packageConfig.timeline === "string" ? packageConfig.timeline : offer.timeline,
+      description: match.description || offer.description,
+    };
+  });
+  const displayConfig = { ...config, offers };
   return (
     <main>
       <SiteHeader />
       <section className="service-detail-hero">
         <div className="container service-detail-hero-inner">
-          <Eyebrow>{config.eyebrow}</Eyebrow>
-          <h1>{config.headline}<br /><span>{config.highlight}</span></h1>
-          <p>{config.intro}</p>
+          <Eyebrow>{displayConfig.eyebrow}</Eyebrow>
+          <h1>{displayConfig.headline}<br /><span>{displayConfig.highlight}</span></h1>
+          <p>{displayConfig.intro}</p>
           <div className="service-detail-hero-bottom">
             <span><i /> BUILT AROUND YOUR OUTCOME</span>
-            <Link className="button button-orange" href={advisorLink(config.eyebrow)}>Discuss your project <ArrowUpRight size={17} /></Link>
+            <Link className="button button-orange" href={advisorLink(displayConfig.eyebrow)}>Discuss your project <ArrowUpRight size={17} /></Link>
           </div>
         </div>
       </section>
       <section className="service-detail-features section-pad">
         <div className="container">
           <div className="section-heading">
-            <div><Eyebrow>WHAT WE HELP YOU DO</Eyebrow><h2>{config.featuresHeading}</h2></div>
-            <p>{config.featuresIntro}</p>
+            <div><Eyebrow>WHAT WE HELP YOU DO</Eyebrow><h2>{displayConfig.featuresHeading}</h2></div>
+            <p>{displayConfig.featuresIntro}</p>
           </div>
           <div className="service-detail-feature-grid">
-            {config.features.map((feature, index) => {
+            {displayConfig.features.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <article className="service-detail-feature" key={feature.title}>
@@ -104,11 +119,11 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
       <section className="service-detail-offers section-pad">
         <div className="container">
           <div className="section-heading">
-            <div><Eyebrow>WAYS TO ENGAGE</Eyebrow><h2>{config.offersHeading}</h2></div>
-            <p>{config.offersIntro}</p>
+            <div><Eyebrow>WAYS TO ENGAGE</Eyebrow><h2>{displayConfig.offersHeading}</h2></div>
+            <p>{displayConfig.offersIntro}</p>
           </div>
           <div className="service-detail-offer-grid">
-            {config.offers.map((offer, index) => (
+            {displayConfig.offers.map((offer, index) => (
               <article className="service-detail-offer" key={offer.name}>
                 <div className="service-detail-offer-top"><span>0{index + 1} / {offer.type.toUpperCase()}</span><span>{offer.timeline}</span></div>
                 <h3>{offer.name}</h3>
@@ -116,18 +131,18 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
                 <p className="service-detail-offer-description">{offer.description}</p>
                 <div className="service-detail-offer-includes">WHAT&apos;S INCLUDED</div>
                 <ul>{offer.deliverables.map((item) => <li key={item}><CheckCircle2 size={16} />{item}</li>)}</ul>
-                <Link href={advisorLink(config.eyebrow, offer.name)}>Request this engagement <ArrowUpRight size={15} /></Link>
+                <Link href={advisorLink(displayConfig.eyebrow, offer.name)}>Request this engagement <ArrowUpRight size={15} /></Link>
               </article>
             ))}
           </div>
-          <p className="service-detail-note">{config.note}</p>
+          <p className="service-detail-note">{displayConfig.note}</p>
         </div>
       </section>
       <section className="service-detail-process section-pad">
         <div className="container service-detail-process-grid">
           <div><Eyebrow>HOW WE WORK</Eyebrow><h2>Clear steps.<br /><span>Shared ownership.</span></h2><p>We keep the work transparent, practical and connected to the outcome you need.</p></div>
           <div className="service-detail-process-list">
-            {config.process.map((step, index) => (
+            {displayConfig.process.map((step, index) => (
               <div key={step.title}><span>0{index + 1}</span><section><h3>{step.title}</h3><p>{step.description}</p></section></div>
             ))}
           </div>
@@ -140,7 +155,7 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
             <p>Bring in another capability when it helps you make progress. We can shape the right combination around your stage and priorities.</p>
           </div>
           <div className="service-detail-related-grid">
-            {config.related.map((item) => (
+            {displayConfig.related.map((item) => (
               <Link href={item.href} className="service-detail-related-card" key={item.href}>
                 <span><strong>{item.title}</strong><small>{item.description}</small></span><ArrowUpRight size={18} />
               </Link>
@@ -150,8 +165,8 @@ export function ServiceLandingPage({ config }: { config: ServicePageConfig }) {
       </section>
       <section className="service-detail-cta section-pad">
         <div className="container service-detail-cta-inner">
-          <div><Eyebrow>LET&apos;S GET STARTED</Eyebrow><h2>{config.ctaTitle}<br /><span>{config.ctaHighlight}</span></h2><p>{config.ctaText}</p></div>
-          <Link className="button button-orange" href={advisorLink(config.eyebrow)}>{config.ctaLabel} <ArrowUpRight size={17} /></Link>
+          <div><Eyebrow>LET&apos;S GET STARTED</Eyebrow><h2>{displayConfig.ctaTitle}<br /><span>{displayConfig.ctaHighlight}</span></h2><p>{displayConfig.ctaText}</p></div>
+          <Link className="button button-orange" href={advisorLink(displayConfig.eyebrow)}>{displayConfig.ctaLabel} <ArrowUpRight size={17} /></Link>
         </div>
       </section>
       <Footer />
