@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type KeyboardEvent } from "react";
+import { useEffect, useState, type FormEvent, type KeyboardEvent } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { trackEvent } from "@/components/analytics";
+import { getPublicServices, submitPublicLead } from "@/lib/public-api";
 
 type Goal = "validate" | "strategy" | "growth" | "brand" | "technology" | "support";
 type Stage = "idea" | "building" | "launching" | "traction" | "established";
@@ -315,7 +316,7 @@ const catalogue = {
   },
 } satisfies Record<string, Offer>;
 
-function makeRecommendation(context: AdvisorContext): Recommendation {
+function makeRecommendation(context: AdvisorContext, offerCatalogue: typeof catalogue = catalogue): Recommendation {
   const note = context.notes.join(" ").toLowerCase();
   const goal = context.goal ?? "growth";
   const stage = context.stage ?? "idea";
@@ -328,17 +329,17 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
   let practicalSteps = ["Write down the outcome you want in one sentence.", "List the assumptions that must be true for that outcome to happen.", "Speak to a few customers or users before deciding what to build or buy."];
 
   if (goal === "validate") {
-    offers = [catalogue.validate];
+    offers = [offerCatalogue.validate];
     title = "Get evidence before making the bigger bet.";
     intro = "The most useful next move is to test the riskiest assumption, not to rush into a full launch or build.";
     why = "A Validate Sprint gives you a structured way to understand the audience, test the proposition and gather feedback before you make the next investment.";
     practicalTitle = "A useful validation exercise you can do yourself";
     practicalSteps = ["Speak to five people who experience the problem.", "Ask how they solve it today, what that costs them and what frustrates them most.", "Listen for repeated behaviour and existing workarounds. Avoid pitching your solution too early."];
-    if (need === "audience") offers.push(catalogue.customerResearch);
-    if (need === "direction") offers.push(catalogue.growthStrategy);
+    if (need === "audience") offers.push(offerCatalogue.customerResearch);
+    if (need === "direction") offers.push(offerCatalogue.growthStrategy);
   } else if (goal === "strategy") {
     const launch = need === "launch" || stage === "launching" || /launch|market entry|new market/.test(note);
-    offers = [launch ? catalogue.goToMarket : catalogue.growthStrategy];
+    offers = [launch ? offerCatalogue.goToMarket : offerCatalogue.growthStrategy];
     title = launch ? "Give the launch a deliberate route to market." : "Turn scattered ideas into a focused direction.";
     intro = launch
       ? "A launch needs more than a date and a campaign. It needs a defined audience, a clear promise, channel choices and a coordinated sequence."
@@ -350,24 +351,24 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
     practicalSteps = ["Complete this sentence: We help [specific audience] solve [specific problem] by [distinctive value].", "List the alternatives customers use today, including doing nothing.", "Choose one customer segment and one measurable outcome to prioritise for the next 90 days."];
   } else if (goal === "growth") {
     if (/social|instagram|facebook|content calendar/.test(note)) {
-      offers = [catalogue.socialLite, catalogue.contentCalendar, catalogue.socialOne];
+      offers = [offerCatalogue.socialLite, offerCatalogue.contentCalendar, offerCatalogue.socialOne];
       title = "Build a social presence you can sustain.";
       intro = "Choose the right level of support for the content and capacity you already have. A publishing-only arrangement is different from full channel management.";
       why = "Social Media Lite is available when you supply the content; full management includes content coordination and community activity.";
       practicalTitle = "A useful social media exercise";
       practicalSteps = ["Choose one audience and one purpose for the channel.", "Review recent posts and identify which ones prompted meaningful replies, enquiries or visits.", "Build the next two weeks around useful, repeatable themes rather than posting for volume."];
     } else if (stage === "idea" || stage === "building") {
-      offers = [catalogue.validate, catalogue.growthStrategy];
+      offers = [offerCatalogue.validate, offerCatalogue.growthStrategy];
       title = "Build the growth foundation before increasing spend.";
       intro = "Before committing to a recurring acquisition programme, make sure the audience, problem and proposition are clear enough to test.";
       why = "Validation and a focused growth plan reduce guesswork and give later marketing activity a stronger starting point.";
       practicalTitle = "A useful growth exercise";
       practicalSteps = ["Describe the one kind of customer you most need to reach.", "Write down what you want them to do after discovering you.", "Identify the biggest unknown between discovery and that action."];
     } else {
-      offers = [stage === "traction" || stage === "established" || need === "conversion" || need === "channels" ? catalogue.growth : catalogue.launch];
+      offers = [stage === "traction" || stage === "established" || need === "conversion" || need === "channels" ? offerCatalogue.growth : offerCatalogue.launch];
       title = stage === "traction" || stage === "established" ? "Turn existing momentum into a stronger growth system." : "Build a consistent path to your first customers.";
       intro = "The next step is to make customer acquisition more deliberate: a clear monthly plan, focused experiments and a regular review of what is working.";
-      why = offers[0] === catalogue.growth
+      why = offers[0] === offerCatalogue.growth
         ? "The Growth programme is designed for products with early traction that need coordinated acquisition, conversion and retention work."
         : "The Launch programme gives an early-stage product a focused operating rhythm across one audience and up to two channels.";
       practicalTitle = "A useful growth exercise";
@@ -375,21 +376,21 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
     }
   } else if (goal === "brand") {
     if (need === "social" || /social|instagram|facebook|content calendar/.test(note)) {
-      offers = [catalogue.socialLite, catalogue.contentCalendar, catalogue.socialOne];
+      offers = [offerCatalogue.socialLite, offerCatalogue.contentCalendar, offerCatalogue.socialOne];
       title = "Make your brand show up consistently.";
       intro = "Choose the level of channel support that matches the work you already have ready. Publishing support and full channel management are different scopes.";
       why = "Social Media Lite is a lower-cost publishing option when you supply content. Full management adds ongoing content coordination and community activity.";
       practicalTitle = "A useful brand exercise";
       practicalSteps = ["Choose three words you want customers to associate with the business.", "Review your last ten posts and note whether they consistently support those words.", "Make sure the next action is obvious on your profile and website."];
     } else if (need === "website-copy" || /website|copy|landing page/.test(note)) {
-      offers = [catalogue.copy, catalogue.growthStrategy];
+      offers = [offerCatalogue.copy, offerCatalogue.growthStrategy];
       title = "Make the value of your business easier to understand.";
       intro = "Strong brand communication starts with a clear promise and carries that message consistently through the website and customer touchpoints.";
       why = "Website copy creates the words customers need to understand the offer; strategy helps make sure those words are grounded in a clear position.";
       practicalTitle = "A useful messaging exercise";
       practicalSteps = ["Ask three customers to explain what they think you offer after looking at your homepage.", "Compare their description with the message you intended.", "Rewrite the opening sentence around the customer's problem and the outcome you deliver."];
     } else {
-      offers = [need === "positioning" ? catalogue.growthStrategy : catalogue.brandStarter, catalogue.brandSystem];
+      offers = [need === "positioning" ? offerCatalogue.growthStrategy : offerCatalogue.brandStarter, offerCatalogue.brandSystem];
       title = "Build a brand people can recognise and understand.";
       intro = "The work should connect how the business is positioned with how it looks and communicates, rather than treating a logo as the whole brand.";
       why = need === "positioning"
@@ -399,7 +400,7 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
       practicalSteps = ["Write a short description of the customer you want to attract.", "Identify what makes your offer meaningfully different from the alternatives.", "Collect examples of brands whose clarity and consistency you admire, and note why they work."];
     }
   } else if (goal === "technology") {
-    offers = [catalogue.technology];
+    offers = [offerCatalogue.technology];
     title = "Define the right product before choosing the build.";
     intro = "Technology should support a real user journey and business outcome. Start by making the job the product needs to do clear.";
     why = "A technical discovery and scoped proposal can help establish the right approach, delivery phases and investment before implementation begins.";
@@ -407,21 +408,21 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
     practicalSteps = ["Describe the primary user and the one task they must be able to complete.", "Map the steps from entry to successful completion.", "Separate must-have launch capabilities from improvements that can wait until real usage provides evidence."];
   } else if (goal === "support") {
     if (need === "analytics") {
-      offers = [catalogue.analytics];
+      offers = [offerCatalogue.analytics];
       title = "Make performance easier to see and act on.";
       intro = "Start by deciding which customer or business actions you need to measure, then build tracking around those decisions.";
       why = "An analytics setup connects conversion events, campaign activity and reporting so your team can make better-informed choices.";
       practicalTitle = "A useful measurement exercise";
       practicalSteps = ["List the three actions that matter most to the business.", "Identify where each action happens and what evidence is available today.", "Agree how often the numbers should be reviewed and who owns each follow-up."];
     } else if (need === "operations" || /launch|campaign/.test(note)) {
-      offers = [catalogue.launchOps];
+      offers = [offerCatalogue.launchOps];
       title = "Bring the moving parts of the launch together.";
       intro = "A launch is easier to execute when owners, dependencies, assets and decision points are visible to everyone involved.";
       why = "Launch and campaign operations provide a coordinated plan, activity tracking and a post-launch review.";
       practicalTitle = "A useful launch exercise";
       practicalSteps = ["Work backwards from the launch date and list every dependency.", "Assign one accountable owner to each critical activity.", "Identify what must be ready before launch and what can be improved afterwards."];
     } else {
-      offers = need === "ongoing" ? [catalogue.ongoingSupport, catalogue.supportPlaybook] : [catalogue.supportPlaybook, catalogue.ongoingSupport];
+      offers = need === "ongoing" ? [offerCatalogue.ongoingSupport, offerCatalogue.supportPlaybook] : [offerCatalogue.supportPlaybook, offerCatalogue.ongoingSupport];
       title = "Make the customer experience more dependable.";
       intro = "Good support is more than answering messages. It needs clear ownership, consistent responses, useful help content and a way to learn from recurring issues.";
       why = "The playbook establishes the operating foundation; ongoing support adds recurring capacity once the volume and coverage are understood.";
@@ -432,16 +433,16 @@ function makeRecommendation(context: AdvisorContext): Recommendation {
 
   if (note.includes("paid ads") || note.includes("advert") || note.includes("facebook ads") || note.includes("google ads")) {
     offers = /two platforms|two channels|multiple platforms/.test(note)
-      ? [catalogue.paidSetup, catalogue.paidTwo]
-      : [catalogue.paidSetup, catalogue.paidOne];
+      ? [offerCatalogue.paidSetup, offerCatalogue.paidTwo]
+      : [offerCatalogue.paidSetup, offerCatalogue.paidOne];
     title = "Make paid acquisition measurable before scaling it.";
     intro = "Paid campaigns work best when the audience, offer and conversion event are clear. Set up measurement before increasing the budget.";
     why = "The published setup and management rates cover BuildGenie's service fees; advertising spend is separate.";
     practicalTitle = "A useful paid media exercise";
     practicalSteps = ["Define the one action a campaign should drive.", "Check that the landing page and conversion event work before launch.", "Set a small test budget and agree what evidence would justify scaling."];
   } else if (note.includes("two platforms") || note.includes("two channels") || note.includes("multiple platforms")) {
-    if (goal === "brand" || note.includes("social")) offers = [catalogue.socialTwo];
-    else if (note.includes("paid") || note.includes("ads")) offers = [catalogue.paidTwo];
+    if (goal === "brand" || note.includes("social")) offers = [offerCatalogue.socialTwo];
+    else if (note.includes("paid") || note.includes("ads")) offers = [offerCatalogue.paidTwo];
   }
 
   return { title, intro, why, offers: offers.slice(0, 3), practicalTitle, practicalSteps };
@@ -519,6 +520,11 @@ function makeId() {
 }
 
 export function ProjectAdvisor({ initialService, initialSelection }: { initialService: string; initialSelection: string }) {
+  const [offerCatalogue, setOfferCatalogue] = useState<typeof catalogue>(catalogue);
+  const [catalogueStatus, setCatalogueStatus] = useState<"loading" | "live" | "fallback">("loading");
+  const [leadCompany, setLeadCompany] = useState("");
+  const [isSubmittingLead, setIsSubmittingLead] = useState(false);
+  const [leadSubmitError, setLeadSubmitError] = useState("");
   const [context, setContext] = useState<AdvisorContext>({ notes: [] });
   const [messages, setMessages] = useState<ChatMessage[]>(() => initialService ? [{
     id: makeId(),
@@ -539,11 +545,51 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
   const [requestedItem, setRequestedItem] = useState("");
   const [requestMailto, setRequestMailto] = useState("");
 
+  useEffect(() => {
+    let active = true;
+    getPublicServices().then((services) => {
+      if (!active) return;
+      const keyMap: Record<string, keyof typeof catalogue> = {
+        "validate-sprint": "validate",
+        "growth-strategy-sprint": "growthStrategy",
+        "go-to-market-strategy": "goToMarket",
+        "launch": "launch",
+        "growth": "growth",
+        "technology-product-development": "technology",
+        "ongoing-support": "ongoingSupport",
+      };
+      const next = { ...catalogue };
+      for (const service of services) {
+        for (const pkg of service.packages ?? []) {
+          const key = keyMap[pkg.slug];
+          if (!key) continue;
+          const config = (pkg.configuration ?? {}) as Record<string, unknown>;
+          const cadence = pkg.billingCadence === "MONTHLY" ? "Per month" : pkg.billingCadence === "ONE_OFF" ? "One-off engagement" : next[key].cadence;
+          next[key] = {
+            ...next[key],
+            name: pkg.name || next[key].name,
+            price: typeof config.displayPrice === "string" ? config.displayPrice : next[key].price,
+            cadence,
+            timeline: typeof config.timeline === "string" ? config.timeline : next[key].timeline,
+            description: pkg.description || next[key].description,
+            href: typeof config.href === "string" ? config.href : next[key].href,
+          };
+        }
+      }
+      setOfferCatalogue(next);
+      setCatalogueStatus("live");
+    }).catch(() => {
+      if (active) setCatalogueStatus("fallback");
+    });
+    return () => { active = false; };
+  }, []);
+
   function startRequest(item: string, recommendation: Recommendation | null) {
     setRequestedItem(item);
     setPlan(recommendation);
     setShowConfirmation(false);
     setRequestMailto("");
+    setLeadSubmitError("");
     setShowLeadForm(true);
     trackEvent("advisor_work_with_us_click", {
       has_recommendation: Boolean(recommendation),
@@ -586,7 +632,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
 
   function chooseNeed(value: string, label: string) {
     const updated = { ...context, need: value };
-    const recommendation = makeRecommendation(updated);
+    const recommendation = makeRecommendation(updated, offerCatalogue);
     trackEvent("advisor_recommendation_generated", {
       goal: updated.goal ?? "unspecified",
       stage: updated.stage ?? "unspecified",
@@ -671,7 +717,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     }
     if (!updated.need) {
       const withNeed = { ...updated, need: inferNeed(goal, text) };
-      const recommendation = makeRecommendation(withNeed);
+      const recommendation = makeRecommendation(withNeed, offerCatalogue);
       setContext(withNeed);
       setPlan(recommendation);
       setMessages((current) => [
@@ -682,7 +728,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       return;
     }
     setContext(updated);
-    const recommendation = makeRecommendation(updated);
+    const recommendation = makeRecommendation(updated, offerCatalogue);
     setPlan(recommendation);
     setMessages((current) => [
       ...current,
@@ -706,8 +752,11 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     setMessages([welcomeMessage()]);
   }
 
-  function submitRequest(event: FormEvent<HTMLFormElement>) {
+  async function submitRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmittingLead) return;
+    setIsSubmittingLead(true);
+    setLeadSubmitError("");
 
     const conversation = messages.map((message) => {
       const speaker = message.role === "user" ? "VISITOR" : "BUILDGENIE ADVISOR";
@@ -716,50 +765,46 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
       if (message.recommendation) {
         sections.push(
           `Recommendation: ${message.recommendation.title}`,
-          message.recommendation.offers.map((offer) =>
-            `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`
-          ).join("\n"),
+          message.recommendation.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`).join("\\n"),
           `Why: ${message.recommendation.why}`,
-          `Practical next steps:\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`
+          `Practical next steps:\\n${message.recommendation.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`
         );
       }
-      return sections.join("\n");
-    }).join("\n\n");
+      return sections.join("\\n");
+    }).join("\\n\\n");
 
     const currentRecommendation = plan
       ? [
           plan.title,
           ...plan.offers.map((offer) => `- ${offer.name}: ${offer.price} (${offer.cadence}; ${offer.timeline})`),
           `Why: ${plan.why}`,
-          `Practical next steps:\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\n")}`,
-        ].join("\n")
+          `Practical next steps:\\n${plan.practicalSteps.map((step, index) => `${index + 1}. ${step}`).join("\\n")}`,
+        ].join("\\n")
       : "No structured recommendation selected yet.";
 
-    const body = [
-      "BUILDGENIE LABS: PROJECT ADVISOR ENQUIRY",
-      "",
-      `Name: ${leadName}`,
-      `Email: ${leadEmail}`,
-      `Interested in: ${requestedItem || "Initial project conversation"}`,
-      "",
-      "CONVERSATION",
+    const advisorContext = [
+      "BUILDGENIE PROJECT ADVISOR CONVERSATION",
       conversation,
-      "",
       "CURRENT RECOMMENDATION",
       currentRecommendation,
-      "",
-      "Prepared on the BuildGenie Labs website. This email is not sent until you review and press Send.",
-    ].join("\n").slice(0, 12000);
+    ].join("\\n\\n").slice(0, 8000);
 
-    const subject = `Project enquiry: ${leadName}`;
-    const mailto = `mailto:hello@buildgenielabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    setRequestMailto(mailto);
-    setShowConfirmation(true);
-    trackEvent("advisor_request_email_prepared", {
-      has_recommendation: Boolean(plan),
-    });
-    window.location.href = mailto;
+    try {
+      await submitPublicLead({
+        email: leadEmail.trim(),
+        contactName: leadName.trim(),
+        companyName: leadCompany.trim() || leadName.trim(),
+        serviceName: requestedItem || plan?.offers.map((offer => offer.name)).join(", ") || "Initial project conversation",
+        source: "website-project-advisor",
+        advisorContext,
+      });
+      setShowConfirmation(true);
+      trackEvent("advisor_lead_submitted", { has_recommendation: Boolean(plan) });
+    } catch (error) {
+      setLeadSubmitError(error instanceof Error ? error.message : "We couldn't save your enquiry. Please try again.");
+    } finally {
+      setIsSubmittingLead(false);
+    }
   }
 
   function onComposerKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
@@ -783,7 +828,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
         </div>
 
         <div className="advisor-workspace">
-          <div className="advisor-chat-body" aria-live="polite">
+          <div className="advisor-chat-body" aria-live="polite">\n            {catalogueStatus === "fallback" && <p className="advisor-handoff-note" role="status">Live pricing is temporarily unavailable. Recommendations are using our saved guide prices.</p>}
             {messages.map((message, index) => (
               <div className={`advisor-message advisor-message-${message.role}`} key={message.id}>
                 {message.role === "assistant" && <span className="advisor-avatar"><Sparkles size={14} /></span>}
@@ -864,9 +909,9 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <div className="advisor-modal-icon"><CheckCircle2 size={20} /></div>
                 <div className="eyebrow"><span className="eyebrow-line" />NEXT STEPS</div>
                 <h2 id="advisor-lead-title">Thank you, {leadName}.</h2>
-                <p>Your email app should open with your details, conversation and recommendation ready to review. Nothing is sent until you press Send.</p>
+                <p>Your enquiry and Advisor conversation have been saved. Our team can review your context and follow up with you.</p>
                 <a className="button button-orange" href={requestMailto || "mailto:hello@buildgenielabs.com"}>Open prepared email <ArrowUpRight size={17} /></a>
-                <p className="advisor-handoff-note">Your conversation is not stored on our servers by this version of the advisor.</p>
+                <p className="advisor-handoff-note">Your project context is attached to the enquiry so you won’t need to repeat yourself.</p>
               </div>
             ) : (
               <>
@@ -875,9 +920,9 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <h2 id="advisor-lead-title">Work with us.</h2>
                 <p>Add your name and email. We&apos;ll prepare an email with your conversation, selected engagement and any recommendation so you do not have to start over.</p>
                 <form onSubmit={submitRequest}>
-                  <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
+                  <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>\n                  <label>Company or product<input value={leadCompany} onChange={(event) => setLeadCompany(event.target.value)} autoComplete="organization" placeholder="Company name (optional)" /></label>
                   <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
-                  <button className="button button-orange" type="submit">Prepare request email <ArrowUpRight size={17} /></button>
+                  {leadSubmitError && <p className="advisor-handoff-note" role="alert">{leadSubmitError}</p>}\n                  <button className="button button-orange" type="submit" disabled={isSubmittingLead}>{isSubmittingLead ? "Saving enquiry…" : "Send project enquiry"} <ArrowUpRight size={17} /></button>
                 </form>
               </>
             )}
