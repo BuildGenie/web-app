@@ -183,7 +183,7 @@ export default async function SpecialistServicesPage() {
         return label.includes(name) || name.includes(label);
       });
       const config = (match?.configuration ?? {}) as Record<string, unknown>;
-      return typeof config.displayPrice === "string" ? \`\${line.split(":")[0]}: \${config.displayPrice}\` : line;
+      return typeof config.displayPrice === "string" ? `${line.split(":")[0]}: ${config.displayPrice}` : line;
     }),
   }));
   return (
@@ -217,6 +217,7 @@ export default async function SpecialistServicesPage() {
             </p>
           </div>
 
+          <p className="sprint-pricing-note">{catalogueLive ? "Prices are synced from the BuildGenie service catalogue." : "Live pricing is temporarily unavailable; saved guide prices are shown."}</p>
           <div className="specialist-catalogue-grid">
             {dynamicServices.map((service) => {
               const Icon = service.icon;
