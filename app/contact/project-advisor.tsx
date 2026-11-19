@@ -588,7 +588,6 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
     setRequestedItem(item);
     setPlan(recommendation);
     setShowConfirmation(false);
-    setRequestMailto("");
     setLeadSubmitError("");
     setShowLeadForm(true);
     trackEvent("advisor_work_with_us_click", {
@@ -920,9 +919,11 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
                 <h2 id="advisor-lead-title">Work with us.</h2>
                 <p>Add your contact details. We’ll save your enquiry together with the conversation and recommendation for our team to review.</p>
                 <form onSubmit={submitRequest}>
-                  <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>\n                  <label>Company or product<input value={leadCompany} onChange={(event) => setLeadCompany(event.target.value)} autoComplete="organization" placeholder="Company name (optional)" /></label>
+                  <label>Your name<input value={leadName} onChange={(event) => setLeadName(event.target.value)} required autoComplete="name" placeholder="Full name" /></label>
+                  <label>Company or product<input value={leadCompany} onChange={(event) => setLeadCompany(event.target.value)} autoComplete="organization" placeholder="Company name (optional)" /></label>
                   <label>Email address<input type="email" value={leadEmail} onChange={(event) => setLeadEmail(event.target.value)} required autoComplete="email" placeholder="you@company.com" /></label>
-                  {leadSubmitError && <p className="advisor-handoff-note" role="alert">{leadSubmitError}</p>}\n                  <button className="button button-orange" type="submit" disabled={isSubmittingLead}>{isSubmittingLead ? "Saving enquiry…" : "Send project enquiry"} <ArrowUpRight size={17} /></button>
+                  {leadSubmitError && <p className="advisor-handoff-note" role="alert">{leadSubmitError}</p>}
+                  <button className="button button-orange" type="submit" disabled={isSubmittingLead}>{isSubmittingLead ? "Saving enquiry…" : "Send project enquiry"} <ArrowUpRight size={17} /></button>
                 </form>
               </>
             )}
