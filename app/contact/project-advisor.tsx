@@ -574,7 +574,7 @@ export function ProjectAdvisor({ initialService, initialSelection }: { initialSe
         "marketing-analytics-tracking": "analytics",
         "support-playbook-faq": "supportPlaybook",
       };
-      const next = { ...catalogue };
+      const next: Record<string, Offer> = { ...catalogue };
       for (const service of services) {
         for (const pkg of service.packages ?? []) {
           const key = keyMap[pkg.slug];
