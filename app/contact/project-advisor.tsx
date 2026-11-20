@@ -125,7 +125,7 @@ const needChoices: Record<Goal, Choice[]> = {
   ],
 };
 
-const catalogue = {
+const catalogue: Record<string, Offer> = {
   validate: {
     name: "Validate Sprint",
     price: "₦250,000",
@@ -314,7 +314,7 @@ const catalogue = {
     description: "Websites, e-commerce platforms, software products, integrations and AI-enabled workflows. Scope and price depend on the product, complexity and delivery needs.",
     href: "/services/technology",
   },
-} satisfies Record<string, Offer>;
+};
 
 function makeRecommendation(context: AdvisorContext, offerCatalogue: typeof catalogue = catalogue): Recommendation {
   const note = context.notes.join(" ").toLowerCase();
