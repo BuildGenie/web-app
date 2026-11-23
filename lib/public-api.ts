@@ -18,7 +18,7 @@ export type PublicService = {
   packages: PublicServicePackage[];
 };
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.buildgenie.com/api/v1").replace(/\/$/, "");
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.buildgenielabs.com/api/v1").replace(/\/$/, "");
 
 export async function getPublicServices(): Promise<PublicService[]> {
   const response = await fetch(`${API_BASE}/public/services`, { cache: "no-store" });
