@@ -39,17 +39,16 @@ export default function PrivacyPage() {
 
           <h2>1. Information you choose to provide</h2>
           <p>
-            The Project Advisor runs in your browser. The messages and selections
-            you make are held in the page session so the advisor can prepare a
-            recommendation. They are not automatically uploaded to a BuildGenie
-            database by the current website implementation.
+            When you send a message to the Project Advisor, the conversation is
+            sent to BuildGenie&apos;s backend and OpenAI to generate a response.
+            Please do not include sensitive information. The conversation remains
+            in your page session and is not saved as an enquiry unless you choose
+            to contact our team.
           </p>
           <p>
-            When you choose “Work with us”, the website asks for your name and
-            email address and prepares an email draft containing those details,
-            the conversation and any recommendation. Your email application
-            opens so you can review and send it. Nothing is delivered to
-            BuildGenie until you send that email.
+            When you choose “Work with us” and submit the form, your contact
+            details and recent conversation are saved as an enquiry for our team
+            to review and follow up.
           </p>
 
           <h2>2. Analytics</h2>

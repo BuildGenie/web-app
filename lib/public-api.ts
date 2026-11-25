@@ -20,6 +20,25 @@ export type PublicService = {
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.buildgenielabs.com/api/v1").replace(/\/$/, "");
 
+export type AdvisorMessage = { role: "user" | "assistant"; content: string };
+
+export async function sendAdvisorMessage(messages: AdvisorMessage[], signal: AbortSignal): Promise<string> {
+  const response = await fetch(`${API_BASE}/public/advisor/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages }),
+    signal,
+  });
+  if (!response.ok) {
+    const body: unknown = await response.json().catch(() => null);
+    const message = typeof body === "object" && body !== null && "message" in body && typeof body.message === "string" ? body.message : "The advisor is unavailable. Please try again.";
+    throw new Error(message);
+  }
+  const body: unknown = await response.json();
+  if (typeof body !== "object" || body === null || !("reply" in body) || typeof body.reply !== "string" || !body.reply.trim()) throw new Error("The advisor returned an invalid response.");
+  return body.reply;
+}
+
 export async function getPublicServices(): Promise<PublicService[]> {
   const response = await fetch(`${API_BASE}/public/services`, { cache: "no-store" });
   if (!response.ok) throw new Error("Could not load BuildGenie services.");

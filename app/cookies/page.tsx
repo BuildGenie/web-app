@@ -36,8 +36,9 @@ export default function CookiesPage() {
       <section className="legal-content section-pad">
         <div className="container legal-document">
           <p className="legal-lead">
-            BuildGenie keeps the website light. The Project Advisor runs in your
-            browser and does not need an account or an analytics cookie to work.
+            BuildGenie keeps the website light. The Project Advisor does not need
+            an account or an analytics cookie to work. Messages are sent to our
+            backend and OpenAI to generate responses.
           </p>
           <h2>Essential browser storage</h2>
           <p>
